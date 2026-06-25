@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { env } from '../lib/env.js'
 import { hashPassword, verifyPassword } from '../utils/password.js'
 import {
   signAccessToken,
@@ -88,7 +87,7 @@ router.post('/login', validate(loginSchema), async (req, res, next) => {
 })
 
 // POST /auth/refresh — renouvelle le jeton d'accès (avec rotation)
-router.post('/refresh', async (req, res, next) => {
+router.post('/refresh', async (req, res) => {
   try {
     const { refresh } = req.body
     if (!refresh) return res.status(400).json({ message: 'Jeton de rafraîchissement requis' })
