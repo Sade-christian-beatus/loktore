@@ -1,0 +1,28 @@
+# Dépendances
+node_modules/
+server/node_modules/
+
+# Build
+dist/
+dev-dist/
+server/dist/
+
+# Variables d'environnement (ne jamais committer de secrets)
+.env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
+
+# Prisma
+server/prisma/*.db
+server/prisma/migrations/dev.db*
+
+# Divers
+*.log
+npm-debug.log*
+.DS_Store
+.vscode/
+.idea/
+coverage/

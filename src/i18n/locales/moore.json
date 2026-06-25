@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Loktoré",
+    "tagline": "Y laafɩ bee y nugẽ"
+  },
+  "nav": {
+    "home": "Yiri",
+    "doctors": "Logtoɛɛmba",
+    "map": "Karte",
+    "profile": "Profɩɩl"
+  },
+  "login": {
+    "title": "Kẽneg",
+    "subtitle": "Kẽng n paam y laafɩ tʋʋma",
+    "email": "Email bɩ telefõ",
+    "password": "Gõ-sõama",
+    "submit": "Kẽng",
+    "noAccount": "Y pa tar kõnt la?",
+    "register": "Maan kõnt",
+    "demoHint": "Demo: kẽes bũmb fãa n ges."
+  },
+  "home": {
+    "greeting": "Ne y yibeoogo, {{name}}",
+    "searchPlaceholder": "Bao logtoɛɛmba, faармasi…",
+    "categories": "Buud-buudu",
+    "onlineDoctors": "Logtoɛɛmb sẽn be online",
+    "onDutyPharmacies": "Faармаси sẽn gũ",
+    "healthTips": "Laafɩ saglsɩ",
+    "bookNow": "Reng rãndeevu",
+    "seeAll": "Ges fãa"
+  },
+  "categories": {
+    "general": "Logtoɛɛga",
+    "pediatrics": "Kamb logtoɛɛga",
+    "gynecology": "Pagb logtoɛɛga",
+    "cardiology": "Sũur logtoɛɛga",
+    "dentistry": "Yẽn logtoɛɛga",
+    "dermatology": "Gãoong logtoɛɛga"
+  },
+  "doctors": {
+    "title": "Logtoɛɛmba",
+    "online": "Online",
+    "fee": "Konsiltaasõ",
+    "book": "Reng rãndeevu"
+  },
+  "map": {
+    "title": "Laafɩ zĩisi",
+    "onDuty": "Sẽn gũ"
+  },
+  "profile": {
+    "title": "Profɩɩl",
+    "language": "Buud-gomde",
+    "notifications": "Notifikaasõ",
+    "logout": "Yi"
+  },
+  "common": {
+    "currency": "FCFA",
+    "loading": "Tʋʋmde…",
+    "km": "km"
+  }
+}

@@ -1,0 +1,144 @@
+// Schéma Prisma — modèle de données Loktoré (cf. PLAN_TECHNIQUE.md §4)
+// Données de santé sensibles : l'autorisation est appliquée dans la couche service.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  patient
+  doctor
+  facility
+}
+
+enum FacilityType {
+  hospital
+  pharmacy
+}
+
+enum AppointmentStatus {
+  pending
+  confirmed
+  cancelled
+  done
+}
+
+// Profil = compte utilisateur (remplace auth.users + profiles de Supabase)
+model Profile {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  phone             String?  @unique
+  passwordHash      String
+  role              Role     @default(patient)
+  fullName          String
+  avatarUrl         String?
+  preferredLanguage String   @default("fr")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  medicalRecord     MedicalRecord?
+  doctor            Doctor?
+  patientAppointments  Appointment[] @relation("PatientAppointments")
+  doctorAppointments   Appointment[] @relation("DoctorAppointments")
+  sentMessages      Message[]
+  refreshTokens     RefreshToken[]
+}
+
+model MedicalRecord {
+  id                String   @id @default(uuid())
+  patient           Profile  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  patientId         String   @unique
+  bloodType         String?
+  allergies         String[]
+  chronicConditions String[]
+  history           Json?
+  updatedAt         DateTime @updatedAt
+}
+
+model Doctor {
+  id              String     @id
+  profile         Profile    @relation(fields: [id], references: [id], onDelete: Cascade)
+  speciality      String
+  facility        Facility?  @relation(fields: [facilityId], references: [id])
+  facilityId      String?
+  bio             String?
+  isOnline        Boolean    @default(false)
+  consultationFee Int        @default(0)
+}
+
+model Facility {
+  id          String       @id @default(uuid())
+  name        String
+  type        FacilityType
+  latitude    Float
+  longitude   Float
+  address     String?
+  phone       String?
+  onDuty      Boolean      @default(false)
+  onDutyUntil DateTime?
+  doctors     Doctor[]
+  medications Medication[]
+}
+
+model Appointment {
+  id          String            @id @default(uuid())
+  patient     Profile           @relation("PatientAppointments", fields: [patientId], references: [id])
+  patientId   String
+  doctor      Profile           @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  doctorId    String
+  scheduledAt DateTime
+  status      AppointmentStatus @default(pending)
+  reason      String?
+  createdAt   DateTime          @default(now())
+
+  @@index([patientId])
+  @@index([doctorId])
+}
+
+model Message {
+  id             String   @id @default(uuid())
+  conversationId String
+  sender         Profile  @relation(fields: [senderId], references: [id])
+  senderId       String
+  content        String
+  readAt         DateTime?
+  createdAt      DateTime @default(now())
+
+  @@index([conversationId])
+}
+
+model Medication {
+  id         String   @id @default(uuid())
+  facility   Facility @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  facilityId String
+  name       String
+  price      Int?
+  inStock    Boolean  @default(true)
+  updatedAt  DateTime @updatedAt
+}
+
+model HealthContent {
+  id          String   @id @default(uuid())
+  category    String
+  title       String
+  body        String
+  mediaUrl    String?
+  language    String   @default("fr")
+  publishedAt DateTime @default(now())
+}
+
+// Jetons de rafraîchissement (révocables) pour la rotation des sessions
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+}

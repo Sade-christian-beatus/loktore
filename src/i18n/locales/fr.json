@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Loktoré",
+    "tagline": "Votre santé à portée de main"
+  },
+  "nav": {
+    "home": "Accueil",
+    "doctors": "Médecins",
+    "map": "Carte",
+    "profile": "Profil"
+  },
+  "login": {
+    "title": "Connexion",
+    "subtitle": "Connectez-vous pour accéder à vos services de santé",
+    "email": "Adresse e-mail ou téléphone",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "noAccount": "Pas encore de compte ?",
+    "register": "Créer un compte",
+    "demoHint": "Mode démo : entrez n'importe quels identifiants pour explorer."
+  },
+  "home": {
+    "greeting": "Bonjour, {{name}}",
+    "searchPlaceholder": "Rechercher un médecin, une pharmacie…",
+    "categories": "Catégories",
+    "onlineDoctors": "Médecins en ligne",
+    "onDutyPharmacies": "Pharmacies de garde",
+    "healthTips": "Conseils santé",
+    "bookNow": "Prendre RDV",
+    "seeAll": "Tout voir"
+  },
+  "categories": {
+    "general": "Généraliste",
+    "pediatrics": "Pédiatrie",
+    "gynecology": "Gynécologie",
+    "cardiology": "Cardiologie",
+    "dentistry": "Dentaire",
+    "dermatology": "Dermatologie"
+  },
+  "doctors": {
+    "title": "Médecins",
+    "online": "En ligne",
+    "fee": "Consultation",
+    "book": "Prendre rendez-vous"
+  },
+  "map": {
+    "title": "Structures de santé",
+    "onDuty": "De garde"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Langue",
+    "notifications": "Notifications",
+    "logout": "Se déconnecter"
+  },
+  "common": {
+    "currency": "FCFA",
+    "loading": "Chargement…",
+    "km": "km"
+  }
+}
