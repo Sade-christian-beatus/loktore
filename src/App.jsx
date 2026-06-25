@@ -5,8 +5,11 @@ import { useAuth } from './hooks/useAuth.js'
 
 // Lazy-loading des pages (cf. plan §2 : navigation avec lazy-loading)
 const Login = lazy(() => import('./pages/Login.jsx'))
+const Register = lazy(() => import('./pages/Register.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Doctors = lazy(() => import('./pages/Doctors.jsx'))
+const Appointments = lazy(() => import('./pages/Appointments.jsx'))
+const MedicalRecord = lazy(() => import('./pages/MedicalRecord.jsx'))
 const Messages = lazy(() => import('./pages/Messages.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
@@ -28,6 +31,7 @@ export default function App() {
     >
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           element={
             <Protected>
@@ -37,6 +41,8 @@ export default function App() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/doctors" element={<Doctors />} />
+          <Route path="/appointments" element={<Appointments />} />
+          <Route path="/medical-record" element={<MedicalRecord />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/profile" element={<Profile />} />

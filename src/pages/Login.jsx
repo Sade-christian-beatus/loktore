@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../hooks/useAuth.js'
 
@@ -73,9 +73,9 @@ export default function Login() {
 
         <p className="text-center text-sm text-slate-500">
           {t('login.noAccount')}{' '}
-          <button type="button" className="font-medium text-brand-700">
+          <Link to="/register" className="font-medium text-brand-700">
             {t('login.register')}
-          </button>
+          </Link>
         </p>
 
         <p className="rounded-xl bg-amber-50 px-3 py-2 text-center text-xs text-amber-700">

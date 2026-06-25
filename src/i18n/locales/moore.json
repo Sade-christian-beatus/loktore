@@ -19,6 +19,13 @@
     "register": "Maan kõnt",
     "demoHint": "Demo: kẽes bũmb fãa n ges."
   },
+  "register": {
+    "title": "Maan kõnt",
+    "fullName": "Yʋʋr fãa",
+    "passwordHint": "Gõ-sõama: 8 gɛɛn minim.",
+    "submit": "Kɩt kõnt",
+    "haveAccount": "Y tara kõnt zoe?"
+  },
   "home": {
     "greeting": "Ne y yibeoogo, {{name}}",
     "question": "Yãmb laafɩ be wãn rũndã?",
@@ -72,7 +79,38 @@
     "title": "Profɩɩl",
     "language": "Buud-gomde",
     "notifications": "Notifikaasõ",
+    "edit": "Teke",
+    "myAppointments": "M rãndeevã",
+    "medicalRecord": "M laafɩ dosie",
     "logout": "Yi"
+  },
+  "booking": {
+    "title": "Reng rãndeevu",
+    "datetime": "Daar la wakat",
+    "reason": "Bʋʋm (sã n datame)",
+    "confirm": "Sɩngre",
+    "success": "Rãndeevã kosame. Y na yã-a « M rãndeevã » pʋgẽ."
+  },
+  "appointments": {
+    "title": "M rãndeevã",
+    "empty": "Rãndeevu ka be ye.",
+    "cancel": "Bas",
+    "status": {
+      "pending": "Gũubo",
+      "confirmed": "Sɩngame",
+      "cancelled": "Basame",
+      "done": "Saame"
+    }
+  },
+  "record": {
+    "title": "M laafɩ dosie",
+    "bloodType": "Zɩɩm buudu",
+    "allergies": "Alɛrzi",
+    "chronicConditions": "Bãas sẽn kaoosde",
+    "commaHint": "Welg ne virgul",
+    "save": "Bĩng",
+    "saved": "Dosie bĩngame.",
+    "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
   },
   "common": {
     "currency": "FCFA",

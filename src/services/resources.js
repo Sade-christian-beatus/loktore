@@ -102,6 +102,10 @@ export async function createAppointment({ doctorId, scheduledAt, reason }) {
   return api.post('/appointments', { doctorId, scheduledAt, reason })
 }
 
+export function updateAppointmentStatus(id, status) {
+  return api.patch(`/appointments/${id}`, { status })
+}
+
 // --- Dossier médical -------------------------------------------------------
 
 export async function fetchMedicalRecord() {
@@ -114,4 +118,14 @@ export async function updateMedicalRecord(payload) {
     throw new Error('Connectez-vous à un compte réel pour modifier votre dossier.')
   }
   return api.put('/me/medical-record', payload)
+}
+
+// --- Profil ----------------------------------------------------------------
+
+export async function updateProfile(payload) {
+  if (!api.hasToken()) {
+    throw new Error('Connectez-vous à un compte réel pour modifier votre profil.')
+  }
+  const { user } = await api.patch('/auth/me', payload)
+  return user
 }

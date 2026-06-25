@@ -28,6 +28,16 @@ function subscribe(listener) {
   return () => listeners.delete(listener)
 }
 
+// Si le refresh token expire pour de bon, on déconnecte proprement.
+api.setAuthExpiredHandler(() => setState({ user: null }))
+
+function persistSession({ user, token, refresh }) {
+  api.setToken(token)
+  api.setRefresh(refresh)
+  setState({ user })
+  return user
+}
+
 export function useAuth() {
   const snapshot = useSyncExternalStore(subscribe, () => state)
 
@@ -36,10 +46,7 @@ export function useAuth() {
     async login({ email, password }) {
       // Tente l'API ; en cas d'échec (backend absent), bascule en démo.
       try {
-        const { user, token } = await api.post('/auth/login', { email, password })
-        api.setToken(token)
-        setState({ user })
-        return user
+        return persistSession(await api.post('/auth/login', { email, password }))
       } catch {
         const demoUser = {
           id: 'demo',
@@ -52,8 +59,19 @@ export function useAuth() {
         return demoUser
       }
     },
+    // Inscription : action réelle, pas de repli démo (l'erreur remonte à l'UI).
+    async register({ email, password, fullName, preferredLanguage }) {
+      return persistSession(
+        await api.post('/auth/register', { email, password, fullName, preferredLanguage }),
+      )
+    },
+    // Met à jour l'utilisateur en mémoire après édition du profil.
+    updateUser(partial) {
+      setState({ user: { ...snapshot.user, ...partial } })
+    },
     logout() {
       api.setToken(null)
+      api.setRefresh(null)
       setState({ user: null })
     },
   }

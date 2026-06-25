@@ -18,6 +18,10 @@ router.get('/', requireAuth, async (req, res, next) => {
     const appointments = await prisma.appointment.findMany({
       where,
       orderBy: { scheduledAt: 'asc' },
+      include: {
+        doctor: { select: { fullName: true } },
+        patient: { select: { fullName: true } },
+      },
     })
     res.json(appointments)
   } catch (err) {

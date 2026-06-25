@@ -19,6 +19,13 @@
     "register": "Créer un compte",
     "demoHint": "Mode démo : entrez n'importe quels identifiants pour explorer."
   },
+  "register": {
+    "title": "Créer un compte",
+    "fullName": "Nom complet",
+    "passwordHint": "8 caractères minimum.",
+    "submit": "S'inscrire",
+    "haveAccount": "Déjà un compte ?"
+  },
   "home": {
     "greeting": "Bonjour {{name}}",
     "question": "Comment allez-vous aujourd'hui ?",
@@ -72,7 +79,38 @@
     "title": "Profil",
     "language": "Langue",
     "notifications": "Notifications",
+    "edit": "Modifier",
+    "myAppointments": "Mes rendez-vous",
+    "medicalRecord": "Mon dossier médical",
     "logout": "Se déconnecter"
+  },
+  "booking": {
+    "title": "Prendre rendez-vous",
+    "datetime": "Date et heure",
+    "reason": "Motif (facultatif)",
+    "confirm": "Confirmer",
+    "success": "Rendez-vous demandé. Vous le retrouvez dans « Mes rendez-vous »."
+  },
+  "appointments": {
+    "title": "Mes rendez-vous",
+    "empty": "Aucun rendez-vous pour le moment.",
+    "cancel": "Annuler",
+    "status": {
+      "pending": "En attente",
+      "confirmed": "Confirmé",
+      "cancelled": "Annulé",
+      "done": "Terminé"
+    }
+  },
+  "record": {
+    "title": "Mon dossier médical",
+    "bloodType": "Groupe sanguin",
+    "allergies": "Allergies",
+    "chronicConditions": "Maladies chroniques",
+    "commaHint": "Séparez par des virgules",
+    "save": "Enregistrer",
+    "saved": "Dossier enregistré.",
+    "demoNotice": "Connectez-vous à un compte réel pour accéder à votre dossier médical."
   },
   "common": {
     "currency": "FCFA",
