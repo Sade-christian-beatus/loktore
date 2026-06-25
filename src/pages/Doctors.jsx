@@ -55,7 +55,9 @@ export default function Doctors() {
       </div>
 
       {loading ? (
-        <p className="mt-6 text-center text-sm text-slate-400">{t('common.loading')}</p>
+        <div className="mt-10 flex justify-center">
+          <span className="spinner" />
+        </div>
       ) : (
         <div className="mt-3 space-y-3">
           {list.map((d) => (

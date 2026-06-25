@@ -93,6 +93,9 @@ export default function Profile() {
       <nav className="card mt-4 divide-y divide-slate-100 p-0">
         <MenuLink to="/appointments" icon="📅" label={t('profile.myAppointments')} />
         <MenuLink to="/medical-record" icon="🩺" label={t('profile.medicalRecord')} />
+        {user?.role === 'admin' && (
+          <MenuLink to="/admin" icon="🛡️" label={t('admin.title')} />
+        )}
       </nav>
 
       <div className="card mt-4">
@@ -123,7 +126,10 @@ export default function Profile() {
 
 function MenuLink({ to, icon, label }) {
   return (
-    <Link to={to} className="flex items-center justify-between px-4 py-3">
+    <Link
+      to={to}
+      className="flex items-center justify-between px-4 py-3 transition active:bg-slate-50"
+    >
       <span className="flex items-center gap-3 text-slate-700">
         <span className="text-xl">{icon}</span>
         {label}

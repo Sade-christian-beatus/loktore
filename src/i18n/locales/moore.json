@@ -114,6 +114,14 @@
     "saved": "Dosie bĩngame.",
     "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
   },
+  "admin": {
+    "title": "Administraasõ",
+    "patients": "Bãad-rãmba",
+    "doctors": "Logtoɛɛmba",
+    "facilities": "Zĩisi",
+    "appointments": "Rãndeevã",
+    "users": "Tũmdba"
+  },
   "common": {
     "currency": "FCFA",
     "loading": "Tʋʋmde…",

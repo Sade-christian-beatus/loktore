@@ -20,6 +20,18 @@ async function main() {
     },
   })
 
+  // Administrateur
+  await prisma.profile.upsert({
+    where: { email: 'admin@loktore.bf' },
+    update: { role: 'admin' },
+    create: {
+      email: 'admin@loktore.bf',
+      passwordHash,
+      fullName: 'Admin Loktoré',
+      role: 'admin',
+    },
+  })
+
   // Structure + médecin
   const chu = await prisma.facility.upsert({
     where: { id: 'seed-chu-yalgado' },
@@ -73,7 +85,8 @@ async function main() {
     },
   })
 
-  console.log('Seed terminé. Compte test : patient@loktore.bf / password123')
+  console.log('Seed terminé. Comptes test (mot de passe : password123) :')
+  console.log('  patient@loktore.bf · dr.ouedraogo@loktore.bf · admin@loktore.bf')
   console.log('Patient id:', patient.id)
 }
 

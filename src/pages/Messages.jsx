@@ -19,7 +19,9 @@ export default function Messages() {
       <h1 className="text-xl font-bold text-slate-800">{t('messages.title')}</h1>
 
       {loading ? (
-        <p className="mt-6 text-center text-sm text-slate-400">{t('common.loading')}</p>
+        <div className="mt-10 flex justify-center">
+          <span className="spinner" />
+        </div>
       ) : list.length === 0 ? (
         <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400">
           <span className="text-5xl">💬</span>
@@ -31,7 +33,11 @@ export default function Messages() {
       ) : (
         <div className="mt-4 divide-y divide-slate-100">
           {list.map((c) => (
-            <Link key={c.id} to={`/messages/${c.id}`} className="flex items-center gap-3 py-3">
+            <Link
+              key={c.id}
+              to={`/messages/${c.id}`}
+              className="flex items-center gap-3 rounded-lg px-1 py-3 transition active:bg-slate-50"
+            >
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-100 font-semibold text-brand-700">
                 {(c.other?.fullName || '?')[0]}
               </div>

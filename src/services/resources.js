@@ -139,6 +139,16 @@ export function sendMessage(conversationId, content) {
   return api.post(`/conversations/${conversationId}/messages`, { content })
 }
 
+// --- Admin -----------------------------------------------------------------
+
+export function fetchAdminStats() {
+  return api.get('/admin/stats')
+}
+
+export function fetchAdminUsers() {
+  return api.get('/admin/users')
+}
+
 // --- Profil ----------------------------------------------------------------
 
 export async function updateProfile(payload) {

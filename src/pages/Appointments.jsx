@@ -34,7 +34,9 @@ export default function Appointments() {
       <h1 className="text-xl font-bold text-slate-800">{t('appointments.title')}</h1>
 
       {loading ? (
-        <p className="mt-6 text-center text-sm text-slate-400">{t('common.loading')}</p>
+        <div className="mt-10 flex justify-center">
+          <span className="spinner" />
+        </div>
       ) : list.length === 0 ? (
         <div className="mt-10 flex flex-col items-center gap-2 text-center text-slate-400">
           <span className="text-5xl">📅</span>

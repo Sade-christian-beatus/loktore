@@ -114,6 +114,14 @@
     "saved": "Dossier enregistré.",
     "demoNotice": "Connectez-vous à un compte réel pour accéder à votre dossier médical."
   },
+  "admin": {
+    "title": "Administration",
+    "patients": "Patients",
+    "doctors": "Médecins",
+    "facilities": "Structures",
+    "appointments": "Rendez-vous",
+    "users": "Utilisateurs"
+  },
   "common": {
     "currency": "FCFA",
     "loading": "Chargement…",

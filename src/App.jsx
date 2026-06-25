@@ -14,6 +14,7 @@ const Messages = lazy(() => import('./pages/Messages.jsx'))
 const ConversationThread = lazy(() => import('./pages/ConversationThread.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
+const Admin = lazy(() => import('./pages/Admin.jsx'))
 
 function Protected({ children }) {
   const { user } = useAuth()
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/messages/:id" element={<ConversationThread />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
