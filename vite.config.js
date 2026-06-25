@@ -15,8 +15,8 @@ export default defineConfig({
         description:
           'Prise de rendez-vous, dossier médical, pharmacies de garde et conseils santé au Burkina Faso.',
         lang: 'fr',
-        theme_color: '#0f766e',
-        background_color: '#f8fafc',
+        theme_color: '#059669',
+        background_color: '#f1f5f9',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',

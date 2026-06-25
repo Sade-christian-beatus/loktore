@@ -5,7 +5,7 @@ import BottomNav from './BottomNav.jsx'
 export default function AppLayout() {
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col bg-slate-50">
-      <main className="flex-1 overflow-y-auto pb-20">
+      <main className="flex-1 overflow-y-auto pb-28">
         <Outlet />
       </main>
       <BottomNav />

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 150" fill="none">
+  <!-- Stéthoscope vert : embouts (oo), tubes formant un cœur, battement cardiaque -->
+  <g stroke="#10b981" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- embouts auriculaires (les deux "o") -->
+    <circle cx="92" cy="44" r="6" fill="#fff"/>
+    <circle cx="122" cy="44" r="6" fill="#fff"/>
+    <!-- tubes descendant en forme de cœur -->
+    <path d="M92 50 C 82 78, 100 92, 107 104 C 114 92, 132 78, 122 50" fill="none"/>
+    <!-- ligne de battement cardiaque -->
+    <path d="M82 70 h12 l5 -10 l7 20 l5 -10 h13" fill="none"/>
+    <!-- pavillon (chestpiece) bas, remplace le O de TORÉ -->
+    <path d="M107 104 C 107 124, 150 124, 150 104" fill="none"/>
+    <circle cx="150" cy="100" r="9" fill="#fff"/>
+    <circle cx="150" cy="100" r="3.5" fill="#10b981" stroke="none"/>
+  </g>
+
+  <!-- Lettres noires -->
+  <g fill="#111111" font-family="Arial, sans-serif" font-weight="800">
+    <text x="60" y="58" font-size="44">L</text>
+    <text x="132" y="58" font-size="44">K</text>
+    <text x="120" y="116" font-size="34">T</text>
+    <text x="165" y="116" font-size="34">RÉ</text>
+  </g>
+</svg>

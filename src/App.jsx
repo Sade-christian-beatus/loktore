@@ -7,6 +7,7 @@ import { useAuth } from './hooks/useAuth.js'
 const Login = lazy(() => import('./pages/Login.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
 const Doctors = lazy(() => import('./pages/Doctors.jsx'))
+const Messages = lazy(() => import('./pages/Messages.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 
@@ -36,6 +37,7 @@ export default function App() {
         >
           <Route path="/" element={<Home />} />
           <Route path="/doctors" element={<Doctors />} />
+          <Route path="/messages" element={<Messages />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

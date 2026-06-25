@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 export default function DoctorCard({ doctor }) {
   const { t } = useTranslation()
   const initials = doctor.fullName
-    .replace(/^Dr\s+/, '')
     .split(' ')
     .map((w) => w[0])
     .slice(0, 2)
@@ -14,11 +13,13 @@ export default function DoctorCard({ doctor }) {
       <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-100 font-semibold text-brand-700">
         {initials}
         {doctor.isOnline && (
-          <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-green-500" />
+          <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-brand-500" />
         )}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate font-medium text-slate-800">{doctor.fullName}</p>
+        <p className="truncate font-medium text-slate-800">
+          {doctor.title} {doctor.fullName}
+        </p>
         <p className="truncate text-sm text-slate-500">
           {t(`categories.${doctor.speciality}`)} · ⭐ {doctor.rating}
         </p>
@@ -28,7 +29,7 @@ export default function DoctorCard({ doctor }) {
         <p className="text-sm font-semibold text-brand-700">
           {doctor.fee.toLocaleString('fr-FR')} {t('common.currency')}
         </p>
-        <button className="mt-1 rounded-lg bg-brand-700 px-3 py-1 text-xs font-medium text-white">
+        <button className="mt-1 rounded-lg bg-brand-600 px-3 py-1 text-xs font-medium text-white">
           {t('home.bookNow')}
         </button>
       </div>

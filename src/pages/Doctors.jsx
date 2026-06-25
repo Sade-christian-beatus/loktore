@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { categories, doctors } from '../data/demo.js'
+import { doctors } from '../data/demo.js'
 import DoctorCard from '../components/DoctorCard.jsx'
+
+// Spécialités présentes dans le jeu de démo (filtres).
+const specialities = [...new Set(doctors.map((d) => d.speciality))]
 
 export default function Doctors() {
   const { t } = useTranslation()
@@ -15,11 +18,11 @@ export default function Doctors() {
 
       <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
         <Chip active={filter === 'all'} onClick={() => setFilter('all')}>
-          {t('home.seeAll')}
+          {t('doctors.all')}
         </Chip>
-        {categories.map((c) => (
-          <Chip key={c.key} active={filter === c.key} onClick={() => setFilter(c.key)}>
-            {c.icon} {t(`categories.${c.key}`)}
+        {specialities.map((s) => (
+          <Chip key={s} active={filter === s} onClick={() => setFilter(s)}>
+            {t(`categories.${s}`)}
           </Chip>
         ))}
       </div>
@@ -39,7 +42,7 @@ function Chip({ active, onClick, children }) {
       onClick={onClick}
       className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm ${
         active
-          ? 'border-brand-700 bg-brand-700 text-white'
+          ? 'border-brand-600 bg-brand-600 text-white'
           : 'border-slate-200 bg-white text-slate-600'
       }`}
     >

@@ -29,11 +29,8 @@ export default function Login() {
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6 py-10">
       <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-brand-700 text-3xl text-white">
-          ✚
-        </div>
-        <h1 className="text-2xl font-bold text-brand-800">{t('app.name')}</h1>
-        <p className="mt-1 text-slate-500">{t('app.tagline')}</p>
+        <img src="/logo.svg" alt="Loktoré" className="mx-auto mb-2 h-24 w-auto" />
+        <p className="text-slate-500">{t('app.tagline')}</p>
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4">

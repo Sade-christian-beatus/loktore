@@ -1,58 +1,71 @@
 // Données de démonstration (Phase 1) — aucune donnée réelle de patient.
 // Servent à montrer les écrans avant le branchement au backend.
 
-export const categories = [
-  { key: 'general', icon: '🩺' },
-  { key: 'pediatrics', icon: '👶' },
-  { key: 'gynecology', icon: '🌸' },
-  { key: 'cardiology', icon: '❤️' },
-  { key: 'dentistry', icon: '🦷' },
-  { key: 'dermatology', icon: '🧴' },
+// Accès rapides de l'accueil (cf. maquette : Hôpital, Pharmacie, Covid 19, Ambulance)
+export const quickAccess = [
+  { key: 'hospital', icon: '🏥' },
+  { key: 'pharmacy', icon: '💊' },
+  { key: 'covid', icon: '🦠' },
+  { key: 'ambulance', icon: '🚑' },
 ]
 
 export const doctors = [
   {
     id: 'd1',
-    fullName: 'Dr Aminata Ouédraogo',
-    speciality: 'general',
-    facility: 'CHU Yalgado, Ouagadougou',
+    title: 'Dr',
+    fullName: 'César KABORE',
+    speciality: 'dentistry',
+    facility: 'Clinique Sandof, Ouagadougou',
     isOnline: true,
-    fee: 5000,
-    rating: 4.8,
+    fee: 6000,
+    rating: 4.7,
   },
   {
     id: 'd2',
-    fullName: 'Dr Boukary Sawadogo',
-    speciality: 'pediatrics',
-    facility: 'Clinique Sandof, Ouagadougou',
-    isOnline: true,
-    fee: 7000,
-    rating: 4.6,
-  },
-  {
-    id: 'd3',
-    fullName: 'Dr Fatoumata Traoré',
+    title: 'Pr',
+    fullName: 'Fatim NANA',
     speciality: 'gynecology',
-    facility: 'CHR Bobo-Dioulasso',
-    isOnline: false,
+    facility: 'CHU Yalgado, Ouagadougou',
+    isOnline: true,
     fee: 8000,
     rating: 4.9,
   },
   {
-    id: 'd4',
-    fullName: 'Dr Issa Kaboré',
-    speciality: 'cardiology',
+    id: 'd3',
+    title: 'Dr',
+    fullName: 'Bertrand KAFANDO',
+    speciality: 'surgery',
     facility: 'Hôpital Tengandogo, Ouagadougou',
-    isOnline: false,
+    isOnline: true,
     fee: 10000,
-    rating: 4.7,
+    rating: 4.8,
+  },
+  {
+    id: 'd4',
+    title: 'Dr',
+    fullName: 'Aminata OUÉDRAOGO',
+    speciality: 'general',
+    facility: 'CHR Bobo-Dioulasso',
+    isOnline: false,
+    fee: 5000,
+    rating: 4.6,
   },
 ]
 
+// Astuces & Conseils Santé (cf. maquette : grille 2×2)
+export const healthTopics = [
+  { key: 'nutrition', icon: '🥗' },
+  { key: 'hygiene', icon: '🧼' },
+  { key: 'sexualHealth', icon: '⚧' },
+  { key: 'moreCategories', icon: '➕' },
+]
+
+// Pharmacies de garde (cf. maquette : nom + téléphone)
 export const pharmacies = [
   {
     id: 'p1',
-    name: 'Pharmacie Wend-Panga',
+    name: 'Pharmacie Coura',
+    phone: '25 00 00 00',
     type: 'pharmacy',
     address: 'Avenue Kwame Nkrumah, Ouagadougou',
     onDuty: true,
@@ -62,7 +75,8 @@ export const pharmacies = [
   },
   {
     id: 'p2',
-    name: 'Pharmacie du Progrès',
+    name: 'Pharmacie Maré',
+    phone: '25 00 00 01',
     type: 'pharmacy',
     address: 'Secteur 15, Ouagadougou',
     onDuty: true,
@@ -72,13 +86,14 @@ export const pharmacies = [
   },
   {
     id: 'p3',
-    name: 'Pharmacie de la Liberté',
+    name: 'Pharmacie Kwasar',
+    phone: '25 00 00 02',
     type: 'pharmacy',
-    address: 'Bobo-Dioulasso centre',
-    onDuty: false,
+    address: 'Secteur 22, Ouagadougou',
+    onDuty: true,
     distanceKm: 3.5,
-    lat: 11.1771,
-    lng: -4.2979,
+    lat: 12.401,
+    lng: -1.49,
   },
 ]
 
@@ -98,26 +113,5 @@ export const facilities = [
     address: 'Ouagadougou',
     lat: 12.3289,
     lng: -1.4894,
-  },
-]
-
-export const healthTips = [
-  {
-    id: 'h1',
-    category: 'nutrition',
-    title: 'Bien s’hydrater pendant la saison chaude',
-    excerpt: 'Buvez de l’eau potable régulièrement pour éviter la déshydratation.',
-  },
-  {
-    id: 'h2',
-    category: 'hygiène',
-    title: 'Se laver les mains au savon',
-    excerpt: 'Un geste simple qui prévient de nombreuses maladies.',
-  },
-  {
-    id: 'h3',
-    category: 'paludisme',
-    title: 'Dormir sous moustiquaire imprégnée',
-    excerpt: 'La meilleure protection contre le paludisme, surtout pour les enfants.',
   },
 ]

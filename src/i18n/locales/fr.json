@@ -5,7 +5,7 @@
   },
   "nav": {
     "home": "Accueil",
-    "doctors": "Médecins",
+    "messages": "Messages",
     "map": "Carte",
     "profile": "Profil"
   },
@@ -20,28 +20,49 @@
     "demoHint": "Mode démo : entrez n'importe quels identifiants pour explorer."
   },
   "home": {
-    "greeting": "Bonjour, {{name}}",
-    "searchPlaceholder": "Rechercher un médecin, une pharmacie…",
-    "categories": "Catégories",
+    "greeting": "Bonjour {{name}}",
+    "question": "Comment allez-vous aujourd'hui ?",
+    "searchPlaceholder": "Rechercher…",
+    "priority": "Votre Santé est Notre Priorité",
+    "talkToDoctor": "Parler à un docteur",
     "onlineDoctors": "Médecins en ligne",
+    "healthTips": "Astuces & Conseils Santé",
     "onDutyPharmacies": "Pharmacies de garde",
-    "healthTips": "Conseils santé",
     "bookNow": "Prendre RDV",
-    "seeAll": "Tout voir"
+    "seeMore": "Voir Plus"
+  },
+  "quickAccess": {
+    "hospital": "Hôpital",
+    "pharmacy": "Pharmacie",
+    "covid": "Covid 19",
+    "ambulance": "Ambulance"
   },
   "categories": {
     "general": "Généraliste",
     "pediatrics": "Pédiatrie",
-    "gynecology": "Gynécologie",
+    "gynecology": "Gynécologue",
     "cardiology": "Cardiologie",
-    "dentistry": "Dentaire",
-    "dermatology": "Dermatologie"
+    "dentistry": "Dentiste",
+    "dermatology": "Dermatologie",
+    "surgery": "Chirurgien"
+  },
+  "topics": {
+    "nutrition": "Nutrition",
+    "hygiene": "Hygiène",
+    "sexualHealth": "Santé Sexuelle",
+    "moreCategories": "De Catégories"
   },
   "doctors": {
     "title": "Médecins",
     "online": "En ligne",
     "fee": "Consultation",
-    "book": "Prendre rendez-vous"
+    "book": "Prendre rendez-vous",
+    "all": "Tous"
+  },
+  "messages": {
+    "title": "Messagerie",
+    "empty": "Vos conversations avec les médecins apparaîtront ici.",
+    "soon": "Disponible prochainement (Phase 4)."
   },
   "map": {
     "title": "Structures de santé",
