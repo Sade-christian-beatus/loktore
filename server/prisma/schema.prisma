@@ -50,6 +50,7 @@ model Profile {
   refreshTokens     RefreshToken[]
   patientConversations Conversation[] @relation("PatientConversations")
   doctorConversations  Conversation[] @relation("DoctorConversations")
+  ownedFacilities      Facility[]     @relation("OwnedFacilities")
 }
 
 model MedicalRecord {
@@ -84,8 +85,12 @@ model Facility {
   phone       String?
   onDuty      Boolean      @default(false)
   onDutyUntil DateTime?
+  owner       Profile?     @relation("OwnedFacilities", fields: [ownerId], references: [id])
+  ownerId     String?
   doctors     Doctor[]
   medications Medication[]
+
+  @@index([ownerId])
 }
 
 model Appointment {

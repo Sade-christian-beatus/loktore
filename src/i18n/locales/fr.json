@@ -7,7 +7,20 @@
     "home": "Accueil",
     "messages": "Messages",
     "map": "Carte",
+    "agenda": "Agenda",
     "profile": "Profil"
+  },
+  "doctor": {
+    "dashboard": "Espace médecin",
+    "today": "Aujourd'hui",
+    "patients": "Patients",
+    "upcoming": "Prochains rendez-vous",
+    "agenda": "Voir l'agenda",
+    "noUpcoming": "Aucun rendez-vous à venir.",
+    "myPatients": "Mes patients",
+    "noPatients": "Aucun patient pour le moment.",
+    "appointmentsCount": "rendez-vous",
+    "recordConsentNotice": "L'accès au dossier médical d'un patient nécessitera son consentement explicite (fonctionnalité à venir)."
   },
   "login": {
     "title": "Connexion",
@@ -97,6 +110,8 @@
     "title": "Mes rendez-vous",
     "empty": "Aucun rendez-vous pour le moment.",
     "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "markDone": "Terminer",
     "status": {
       "pending": "En attente",
       "confirmed": "Confirmé",
@@ -113,6 +128,19 @@
     "save": "Enregistrer",
     "saved": "Dossier enregistré.",
     "demoNotice": "Connectez-vous à un compte réel pour accéder à votre dossier médical."
+  },
+  "pharmacy": {
+    "dashboard": "Espace pharmacie",
+    "products": "Produits",
+    "inStock": "En stock",
+    "addProduct": "Ajouter un produit",
+    "name": "Nom du produit",
+    "price": "Prix",
+    "add": "Ajouter",
+    "catalog": "Catalogue",
+    "available": "Disponible",
+    "outOfStock": "Rupture",
+    "remove": "Retirer"
   },
   "admin": {
     "title": "Administration",

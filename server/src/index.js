@@ -15,6 +15,7 @@ import meRouter from './routes/me.js'
 import appointmentsRouter from './routes/appointments.js'
 import directoryRouter from './routes/directory.js'
 import adminRouter from './routes/admin.js'
+import pharmacyRouter from './routes/pharmacy.js'
 import conversationsRouter, { getMemberConversation } from './routes/conversations.js'
 
 const app = express()
@@ -37,6 +38,7 @@ api.use('/me', meRouter)
 api.use('/appointments', appointmentsRouter)
 api.use('/conversations', conversationsRouter)
 api.use('/admin', adminRouter)
+api.use('/pharmacy', pharmacyRouter)
 api.use('/', directoryRouter) // /doctors, /facilities
 app.use('/api/v1', api)
 

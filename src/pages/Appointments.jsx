@@ -18,8 +18,10 @@ export default function Appointments() {
   const { data, loading } = useFetch(fetchAppointments, [tick])
   const list = data || []
 
-  async function cancel(id) {
-    await updateAppointmentStatus(id, 'cancelled')
+  const isDoctor = user?.role === 'doctor'
+
+  async function act(id, status) {
+    await updateAppointmentStatus(id, status)
     setTick((n) => n + 1)
   }
 
@@ -45,9 +47,8 @@ export default function Appointments() {
       ) : (
         <div className="mt-4 space-y-3">
           {list.map((a) => {
-            const other =
-              user?.role === 'doctor' ? a.patient?.fullName : a.doctor?.fullName
-            const canCancel = a.status === 'pending' || a.status === 'confirmed'
+            const other = isDoctor ? a.patient?.fullName : a.doctor?.fullName
+            const active = a.status === 'pending' || a.status === 'confirmed'
             return (
               <div key={a.id} className="card">
                 <div className="flex items-start justify-between">
@@ -64,13 +65,31 @@ export default function Appointments() {
                     {t(`appointments.status.${a.status}`)}
                   </span>
                 </div>
-                {canCancel && (
-                  <button
-                    onClick={() => cancel(a.id)}
-                    className="mt-3 w-full rounded-lg border border-red-200 py-1.5 text-sm font-medium text-red-600"
-                  >
-                    {t('appointments.cancel')}
-                  </button>
+                {active && (
+                  <div className="mt-3 flex gap-2">
+                    {isDoctor && a.status === 'pending' && (
+                      <button
+                        onClick={() => act(a.id, 'confirmed')}
+                        className="flex-1 rounded-lg bg-brand-600 py-1.5 text-sm font-medium text-white"
+                      >
+                        {t('appointments.confirm')}
+                      </button>
+                    )}
+                    {isDoctor && a.status === 'confirmed' && (
+                      <button
+                        onClick={() => act(a.id, 'done')}
+                        className="flex-1 rounded-lg bg-slate-700 py-1.5 text-sm font-medium text-white"
+                      >
+                        {t('appointments.markDone')}
+                      </button>
+                    )}
+                    <button
+                      onClick={() => act(a.id, 'cancelled')}
+                      className="flex-1 rounded-lg border border-red-200 py-1.5 text-sm font-medium text-red-600"
+                    >
+                      {t('appointments.cancel')}
+                    </button>
+                  </div>
                 )}
               </div>
             )

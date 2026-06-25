@@ -149,6 +149,24 @@ export function fetchAdminUsers() {
   return api.get('/admin/users')
 }
 
+// --- Pharmacie -------------------------------------------------------------
+
+export function fetchPharmacyMedications() {
+  return api.get('/pharmacy/medications')
+}
+
+export function createMedication(payload) {
+  return api.post('/pharmacy/medications', payload)
+}
+
+export function updateMedication(id, payload) {
+  return api.patch(`/pharmacy/medications/${id}`, payload)
+}
+
+export function deleteMedication(id) {
+  return api.del(`/pharmacy/medications/${id}`)
+}
+
 // --- Profil ----------------------------------------------------------------
 
 export async function updateProfile(payload) {

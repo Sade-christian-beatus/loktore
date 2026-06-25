@@ -7,7 +7,20 @@
     "home": "Yiri",
     "messages": "Koeesgo",
     "map": "Karte",
+    "agenda": "Ajenda",
     "profile": "Profɩɩl"
+  },
+  "doctor": {
+    "dashboard": "Logtoɛɛga zĩiga",
+    "today": "Rũndã",
+    "patients": "Bãad-rãmba",
+    "upcoming": "Rãndeevã sẽn watẽ",
+    "agenda": "Ges ajenda",
+    "noUpcoming": "Rãndeevu ka be sẽn watẽ ye.",
+    "myPatients": "M bãad-rãmba",
+    "noPatients": "Bãad ka be ye.",
+    "appointmentsCount": "rãndeevã",
+    "recordConsentNotice": "Bãad dosie paamdã na n baoo a sõmblem (na n wa)."
   },
   "login": {
     "title": "Kẽneg",
@@ -97,6 +110,8 @@
     "title": "M rãndeevã",
     "empty": "Rãndeevu ka be ye.",
     "cancel": "Bas",
+    "confirm": "Sɩngre",
+    "markDone": "Sa",
     "status": {
       "pending": "Gũubo",
       "confirmed": "Sɩngame",
@@ -113,6 +128,19 @@
     "save": "Bĩng",
     "saved": "Dosie bĩngame.",
     "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
+  },
+  "pharmacy": {
+    "dashboard": "Faармаси zĩiga",
+    "products": "Teedo",
+    "inStock": "Sẽn be",
+    "addProduct": "Paas tɩɩm",
+    "name": "Tɩɩm yʋʋr",
+    "price": "Ligdi",
+    "add": "Paas",
+    "catalog": "Teed fãa",
+    "available": "Sẽn be",
+    "outOfStock": "Sa-yã",
+    "remove": "Yiis"
   },
   "admin": {
     "title": "Administraasõ",

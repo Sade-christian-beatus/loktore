@@ -71,9 +71,21 @@ async function main() {
     },
   })
 
-  await prisma.facility.upsert({
+  // Compte pharmacie (rôle facility) + sa structure
+  const pharmacyProfile = await prisma.profile.upsert({
+    where: { email: 'pharmacie@loktore.bf' },
+    update: { role: 'facility' },
+    create: {
+      email: 'pharmacie@loktore.bf',
+      passwordHash,
+      fullName: 'Pharmacie Wend-Panga',
+      role: 'facility',
+    },
+  })
+
+  const pharmacy = await prisma.facility.upsert({
     where: { id: 'seed-pharma-wendpanga' },
-    update: {},
+    update: { ownerId: pharmacyProfile.id },
     create: {
       id: 'seed-pharma-wendpanga',
       name: 'Pharmacie Wend-Panga',
@@ -82,11 +94,24 @@ async function main() {
       longitude: -1.5275,
       address: 'Avenue Kwame Nkrumah, Ouagadougou',
       onDuty: true,
+      ownerId: pharmacyProfile.id,
     },
   })
 
+  // Quelques produits de démonstration
+  for (const m of [
+    { name: 'Paracétamol 500mg', price: 500, inStock: true },
+    { name: 'Amoxicilline 500mg', price: 1500, inStock: true },
+    { name: 'Sérum oral (SRO)', price: 300, inStock: false },
+  ]) {
+    const exists = await prisma.medication.findFirst({
+      where: { facilityId: pharmacy.id, name: m.name },
+    })
+    if (!exists) await prisma.medication.create({ data: { facilityId: pharmacy.id, ...m } })
+  }
+
   console.log('Seed terminé. Comptes test (mot de passe : password123) :')
-  console.log('  patient@loktore.bf · dr.ouedraogo@loktore.bf · admin@loktore.bf')
+  console.log('  patient@loktore.bf · dr.ouedraogo@loktore.bf · admin@loktore.bf · pharmacie@loktore.bf')
   console.log('Patient id:', patient.id)
 }
 

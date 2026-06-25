@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../hooks/useAuth.js'
 
 // Icônes en trait (style maquette), héritent de currentColor.
 const HomeIcon = (p) => (
@@ -19,6 +20,12 @@ const MapIcon = (p) => (
     <circle cx="12" cy="10" r="2.5" />
   </svg>
 )
+const CalendarIcon = (p) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <rect x="3" y="5" width="18" height="16" rx="2" />
+    <path d="M3 9h18M8 3v4M16 3v4" />
+  </svg>
+)
 const UserIcon = (p) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
     <circle cx="12" cy="8" r="4" />
@@ -26,15 +33,30 @@ const UserIcon = (p) => (
   </svg>
 )
 
-const items = [
-  { to: '/', key: 'home', Icon: HomeIcon },
-  { to: '/messages', key: 'messages', Icon: ChatIcon },
-  { to: '/map', key: 'map', Icon: MapIcon },
-  { to: '/profile', key: 'profile', Icon: UserIcon },
-]
+const byRole = {
+  patient: [
+    { to: '/', key: 'home', Icon: HomeIcon },
+    { to: '/messages', key: 'messages', Icon: ChatIcon },
+    { to: '/map', key: 'map', Icon: MapIcon },
+    { to: '/profile', key: 'profile', Icon: UserIcon },
+  ],
+  doctor: [
+    { to: '/', key: 'home', Icon: HomeIcon },
+    { to: '/appointments', key: 'agenda', Icon: CalendarIcon },
+    { to: '/messages', key: 'messages', Icon: ChatIcon },
+    { to: '/profile', key: 'profile', Icon: UserIcon },
+  ],
+  facility: [
+    { to: '/', key: 'home', Icon: HomeIcon },
+    { to: '/profile', key: 'profile', Icon: UserIcon },
+  ],
+}
 
 export default function BottomNav() {
   const { t } = useTranslation()
+  const { user } = useAuth()
+  const items = byRole[user?.role] || byRole.patient
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-10 mx-auto flex max-w-md justify-center px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <nav className="flex w-full items-center justify-around rounded-full bg-brand-600 px-4 py-3 shadow-lg shadow-brand-600/30">
