@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../hooks/useAuth.js'
 import { updateProfile } from '../services/resources.js'
+import { enableNotifications, notificationsSupported } from '../services/push.js'
 
 const languages = [
   { code: 'fr', label: 'Français' },
@@ -16,6 +17,17 @@ export default function Profile() {
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [notif, setNotif] = useState('')
+
+  async function activateNotifications() {
+    setNotif('')
+    try {
+      await enableNotifications()
+      setNotif(t('profile.notifEnabled'))
+    } catch (err) {
+      setNotif(err.message)
+    }
+  }
 
   async function saveName(e) {
     e.preventDefault()
@@ -116,6 +128,21 @@ export default function Profile() {
           ))}
         </div>
       </div>
+
+      {notificationsSupported() && (
+        <div className="card mt-4">
+          <p className="mb-2 text-sm font-medium text-slate-600">
+            {t('profile.notifications')}
+          </p>
+          <button
+            onClick={activateNotifications}
+            className="w-full rounded-xl border border-brand-200 py-2 text-sm font-medium text-brand-700"
+          >
+            {t('profile.enableNotifications')}
+          </button>
+          {notif && <p className="mt-2 text-xs text-slate-500">{notif}</p>}
+        </div>
+      )}
 
       <button onClick={logout} className="btn-primary mt-6 w-full bg-red-600">
         {t('profile.logout')}

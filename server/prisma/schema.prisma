@@ -51,6 +51,7 @@ model Profile {
   patientConversations Conversation[] @relation("PatientConversations")
   doctorConversations  Conversation[] @relation("DoctorConversations")
   ownedFacilities      Facility[]     @relation("OwnedFacilities")
+  pushSubscriptions    PushSubscription[]
 }
 
 model MedicalRecord {
@@ -165,6 +166,19 @@ model MedicalAccessLog {
 
   @@index([patientId])
   @@index([actorId])
+}
+
+// Abonnements Web Push (un appareil/navigateur par enregistrement)
+model PushSubscription {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  @@index([profileId])
 }
 
 // Jetons de rafraîchissement (révocables) pour la rotation des sessions

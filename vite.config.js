@@ -33,6 +33,8 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Handlers Web Push ajoutés au service worker généré.
+        importScripts: ['/push-sw.js'],
         // Cache léger adapté aux connexions lentes / intermittentes (cf. plan §1)
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         runtimeCaching: [

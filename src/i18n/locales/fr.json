@@ -94,6 +94,8 @@
     "title": "Profil",
     "language": "Langue",
     "notifications": "Notifications",
+    "enableNotifications": "Activer les notifications",
+    "notifEnabled": "Notifications activées sur cet appareil.",
     "edit": "Modifier",
     "myAppointments": "Mes rendez-vous",
     "medicalRecord": "Mon dossier médical",

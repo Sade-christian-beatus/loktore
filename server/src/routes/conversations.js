@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
 import { requireAuth, requireRole } from '../middleware/auth.js'
 import { validate } from '../middleware/validate.js'
+import { sendToUser } from '../lib/push.js'
 
 const router = Router()
 router.use(requireAuth)
@@ -101,6 +102,15 @@ router.post('/:id/messages', validate(messageSchema), async (req, res, next) => 
 
     // Diffusion aux membres connectés à la room.
     req.app.get('io')?.to(`conv:${conv.id}`).emit('message:new', message)
+
+    // Notification push au destinataire (l'autre membre).
+    const recipientId = conv.patientId === req.user.id ? conv.doctorId : conv.patientId
+    sendToUser(recipientId, {
+      title: 'Loktoré — nouveau message',
+      body: req.body.content.slice(0, 80),
+      url: `/messages/${conv.id}`,
+    }).catch(() => {})
+
     res.status(201).json(message)
   } catch (err) {
     next(err)
