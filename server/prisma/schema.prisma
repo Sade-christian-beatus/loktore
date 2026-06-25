@@ -29,6 +29,12 @@ enum AppointmentStatus {
   done
 }
 
+enum ConsentStatus {
+  pending
+  granted
+  revoked
+}
+
 // Profil = compte utilisateur (remplace auth.users + profiles de Supabase)
 model Profile {
   id                String   @id @default(uuid())
@@ -52,6 +58,8 @@ model Profile {
   doctorConversations  Conversation[] @relation("DoctorConversations")
   ownedFacilities      Facility[]     @relation("OwnedFacilities")
   pushSubscriptions    PushSubscription[]
+  patientConsents      RecordConsent[] @relation("PatientConsents")
+  doctorConsents       RecordConsent[] @relation("DoctorConsents")
 }
 
 model MedicalRecord {
@@ -150,6 +158,23 @@ model Conversation {
   doctorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([patientId, doctorId])
+  @@index([patientId])
+  @@index([doctorId])
+}
+
+// Consentement d'un patient au partage de son dossier avec un médecin
+// (tracé et révocable, cf. PLAN §7.4).
+model RecordConsent {
+  id        String        @id @default(uuid())
+  patient   Profile       @relation("PatientConsents", fields: [patientId], references: [id], onDelete: Cascade)
+  patientId String
+  doctor    Profile       @relation("DoctorConsents", fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId  String
+  status    ConsentStatus @default(pending)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 
   @@unique([patientId, doctorId])
   @@index([patientId])

@@ -131,6 +131,22 @@
     "saved": "Dosie bĩngame.",
     "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
   },
+  "consent": {
+    "title": "Dosie pʋɩɩbo",
+    "subtitle": "Kõ wall n yiis logtoɛɛmb sor n ges y laafɩ dosie.",
+    "empty": "Kosg ka be ye.",
+    "grant": "Kõ sor",
+    "revoke": "Yiis sor",
+    "request": "Kos dosie sor",
+    "waiting": "Gũ bãad sõmblem",
+    "viewRecord": "Ges dosie",
+    "accessLogged": "Paamd-kãngã gʋlsame la a baooda bãad sõmblem.",
+    "status": {
+      "pending": "Gũubo",
+      "granted": "Kõame",
+      "revoked": "Yiisame"
+    }
+  },
   "pharmacy": {
     "dashboard": "Faармаси zĩiga",
     "products": "Teedo",

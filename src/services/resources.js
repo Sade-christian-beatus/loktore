@@ -139,6 +139,24 @@ export function sendMessage(conversationId, content) {
   return api.post(`/conversations/${conversationId}/messages`, { content })
 }
 
+// --- Consentements (partage du dossier médical) ----------------------------
+
+export function fetchConsents() {
+  return api.get('/consents')
+}
+
+export function requestConsent(patientId) {
+  return api.post('/consents', { patientId })
+}
+
+export function decideConsent(id, status) {
+  return api.patch(`/consents/${id}`, { status })
+}
+
+export function fetchPatientRecord(patientId) {
+  return api.get(`/patients/${patientId}/medical-record`)
+}
+
 // --- Admin -----------------------------------------------------------------
 
 export function fetchAdminStats() {

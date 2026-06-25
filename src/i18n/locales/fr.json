@@ -131,6 +131,22 @@
     "saved": "Dossier enregistré.",
     "demoNotice": "Connectez-vous à un compte réel pour accéder à votre dossier médical."
   },
+  "consent": {
+    "title": "Partage du dossier",
+    "subtitle": "Autorisez ou retirez l'accès des médecins à votre dossier médical.",
+    "empty": "Aucune demande d'accès.",
+    "grant": "Accorder",
+    "revoke": "Révoquer",
+    "request": "Demander l'accès au dossier",
+    "waiting": "Demande en attente du patient",
+    "viewRecord": "Voir le dossier",
+    "accessLogged": "Cet accès est journalisé et soumis au consentement du patient.",
+    "status": {
+      "pending": "En attente",
+      "granted": "Accordé",
+      "revoked": "Révoqué"
+    }
+  },
   "pharmacy": {
     "dashboard": "Espace pharmacie",
     "products": "Produits",

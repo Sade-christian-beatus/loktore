@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
 import { requireAuth, requireRole } from '../middleware/auth.js'
 import { validate } from '../middleware/validate.js'
-import { encrypt, decrypt, encryptArray, decryptArray } from '../utils/crypto.js'
+import { encodeForStorage, decodeRecord, logAccess } from '../lib/medicalRecord.js'
 
 const router = Router()
 
@@ -13,44 +13,6 @@ router.use(requireAuth, requireRole('patient'))
 // Toutes ces routes touchent le dossier médical : propriété stricte (cf. plan §6).
 // req.user.id est l'unique propriétaire autorisé — aucun paramètre d'id client.
 // Les champs sensibles sont chiffrés au repos (cf. PLAN §7.4).
-
-function encodeForStorage(body) {
-  const data = {}
-  if (body.bloodType !== undefined) data.bloodType = encrypt(body.bloodType)
-  if (body.allergies !== undefined) data.allergies = encryptArray(body.allergies)
-  if (body.chronicConditions !== undefined) {
-    data.chronicConditions = encryptArray(body.chronicConditions)
-  }
-  if (body.history !== undefined) {
-    data.history = body.history == null ? null : { __enc: encrypt(JSON.stringify(body.history)) }
-  }
-  return data
-}
-
-// Journalise un accès au dossier (best-effort, ne bloque pas la réponse).
-function logAccess(actorId, patientId, action) {
-  return prisma.medicalAccessLog
-    .create({ data: { actorId, patientId, action } })
-    .catch(() => {})
-}
-
-function decodeRecord(rec) {
-  let history = rec.history
-  if (history && history.__enc) {
-    try {
-      history = JSON.parse(decrypt(history.__enc))
-    } catch {
-      history = null
-    }
-  }
-  return {
-    ...rec,
-    bloodType: decrypt(rec.bloodType),
-    allergies: decryptArray(rec.allergies),
-    chronicConditions: decryptArray(rec.chronicConditions),
-    history,
-  }
-}
 
 // GET /me/medical-record — lit SON dossier
 router.get('/medical-record', async (req, res, next) => {

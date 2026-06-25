@@ -105,6 +105,9 @@ export default function Profile() {
       <nav className="card mt-4 divide-y divide-slate-100 p-0">
         <MenuLink to="/appointments" icon="📅" label={t('profile.myAppointments')} />
         <MenuLink to="/medical-record" icon="🩺" label={t('profile.medicalRecord')} />
+        {user?.role === 'patient' && (
+          <MenuLink to="/consents" icon="🔐" label={t('consent.title')} />
+        )}
         {user?.role === 'admin' && (
           <MenuLink to="/admin" icon="🛡️" label={t('admin.title')} />
         )}
