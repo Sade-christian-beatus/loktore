@@ -14,6 +14,7 @@ import authRouter from './routes/auth.js'
 import meRouter from './routes/me.js'
 import appointmentsRouter from './routes/appointments.js'
 import directoryRouter from './routes/directory.js'
+import adminRouter from './routes/admin.js'
 
 const app = express()
 
@@ -33,6 +34,7 @@ const api = express.Router()
 api.use('/auth', authLimiter, authRouter)
 api.use('/me', meRouter)
 api.use('/appointments', appointmentsRouter)
+api.use('/admin', adminRouter)
 api.use('/', directoryRouter) // /doctors, /facilities
 app.use('/api/v1', api)
 

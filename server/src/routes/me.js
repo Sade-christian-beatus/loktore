@@ -1,16 +1,19 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { requireAuth } from '../middleware/auth.js'
+import { requireAuth, requireRole } from '../middleware/auth.js'
 import { validate } from '../middleware/validate.js'
 
 const router = Router()
+
+// Le dossier médical est réservé aux patients.
+router.use(requireAuth, requireRole('patient'))
 
 // Toutes ces routes touchent le dossier médical : propriété stricte (cf. plan §6).
 // req.user.id est l'unique propriétaire autorisé — aucun paramètre d'id client.
 
 // GET /me/medical-record — lit SON dossier
-router.get('/medical-record', requireAuth, async (req, res, next) => {
+router.get('/medical-record', async (req, res, next) => {
   try {
     let record = await prisma.medicalRecord.findUnique({
       where: { patientId: req.user.id },
@@ -33,7 +36,7 @@ const updateSchema = z.object({
 })
 
 // PUT /me/medical-record — met à jour SON dossier
-router.put('/medical-record', requireAuth, validate(updateSchema), async (req, res, next) => {
+router.put('/medical-record', validate(updateSchema), async (req, res, next) => {
   try {
     const record = await prisma.medicalRecord.upsert({
       where: { patientId: req.user.id },

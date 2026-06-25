@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
-import { requireAuth, assertOwnership } from '../middleware/auth.js'
+import { requireAuth, requireRole, assertOwnership } from '../middleware/auth.js'
 import { validate } from '../middleware/validate.js'
 
 const router = Router()
@@ -31,22 +31,49 @@ const createSchema = z.object({
   reason: z.string().max(500).optional(),
 })
 
-// POST /appointments — réserve un créneau (patient)
-router.post('/', requireAuth, validate(createSchema), async (req, res, next) => {
-  try {
-    const appointment = await prisma.appointment.create({
-      data: {
-        patientId: req.user.id,
-        doctorId: req.body.doctorId,
-        scheduledAt: req.body.scheduledAt,
-        reason: req.body.reason,
-      },
-    })
-    res.status(201).json(appointment)
-  } catch (err) {
-    next(err)
-  }
-})
+// POST /appointments — réserve un créneau (patient uniquement)
+router.post(
+  '/',
+  requireAuth,
+  requireRole('patient'),
+  validate(createSchema),
+  async (req, res, next) => {
+    try {
+      // Le doctorId doit correspondre à un profil de rôle « doctor ».
+      const doctor = await prisma.profile.findUnique({
+        where: { id: req.body.doctorId },
+        select: { role: true },
+      })
+      if (!doctor || doctor.role !== 'doctor') {
+        return res.status(400).json({ message: 'Médecin introuvable' })
+      }
+
+      // Anti-conflit : pas deux RDV actifs sur le même créneau pour ce médecin.
+      const clash = await prisma.appointment.findFirst({
+        where: {
+          doctorId: req.body.doctorId,
+          scheduledAt: req.body.scheduledAt,
+          status: { in: ['pending', 'confirmed'] },
+        },
+      })
+      if (clash) {
+        return res.status(409).json({ message: 'Ce créneau est déjà réservé' })
+      }
+
+      const appointment = await prisma.appointment.create({
+        data: {
+          patientId: req.user.id,
+          doctorId: req.body.doctorId,
+          scheduledAt: req.body.scheduledAt,
+          reason: req.body.reason,
+        },
+      })
+      res.status(201).json(appointment)
+    } catch (err) {
+      next(err)
+    }
+  },
+)
 
 const patchSchema = z.object({
   status: z.enum(['pending', 'confirmed', 'cancelled', 'done']),

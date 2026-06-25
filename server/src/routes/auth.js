@@ -139,4 +139,22 @@ router.get('/me', requireAuth, async (req, res, next) => {
   }
 })
 
+const updateMeSchema = z.object({
+  fullName: z.string().min(2).optional(),
+  preferredLanguage: z.enum(['fr', 'moore']).optional(),
+})
+
+// PATCH /auth/me — met à jour son propre profil (nom, langue)
+router.patch('/me', requireAuth, validate(updateMeSchema), async (req, res, next) => {
+  try {
+    const profile = await prisma.profile.update({
+      where: { id: req.user.id },
+      data: req.body,
+    })
+    res.json({ user: publicProfile(profile) })
+  } catch (err) {
+    next(err)
+  }
+})
+
 export default router
