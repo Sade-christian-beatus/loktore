@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export default function DoctorCard({ doctor, onBook }) {
+export default function DoctorCard({ doctor, onBook, onMessage }) {
   const { t } = useTranslation()
   const initials = doctor.fullName
     .split(' ')
@@ -29,12 +29,23 @@ export default function DoctorCard({ doctor, onBook }) {
         <p className="text-sm font-semibold text-brand-700">
           {doctor.fee.toLocaleString('fr-FR')} {t('common.currency')}
         </p>
-        <button
-          onClick={() => onBook?.(doctor)}
-          className="mt-1 rounded-lg bg-brand-600 px-3 py-1 text-xs font-medium text-white"
-        >
-          {t('home.bookNow')}
-        </button>
+        <div className="mt-1 flex items-center justify-end gap-1">
+          {onMessage && (
+            <button
+              onClick={() => onMessage(doctor)}
+              aria-label="Message"
+              className="rounded-lg border border-brand-200 px-2 py-1 text-xs text-brand-700"
+            >
+              💬
+            </button>
+          )}
+          <button
+            onClick={() => onBook?.(doctor)}
+            className="rounded-lg bg-brand-600 px-3 py-1 text-xs font-medium text-white"
+          >
+            {t('home.bookNow')}
+          </button>
+        </div>
       </div>
     </div>
   )

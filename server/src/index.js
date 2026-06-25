@@ -15,6 +15,7 @@ import meRouter from './routes/me.js'
 import appointmentsRouter from './routes/appointments.js'
 import directoryRouter from './routes/directory.js'
 import adminRouter from './routes/admin.js'
+import conversationsRouter, { getMemberConversation } from './routes/conversations.js'
 
 const app = express()
 
@@ -34,6 +35,7 @@ const api = express.Router()
 api.use('/auth', authLimiter, authRouter)
 api.use('/me', meRouter)
 api.use('/appointments', appointmentsRouter)
+api.use('/conversations', conversationsRouter)
 api.use('/admin', adminRouter)
 api.use('/', directoryRouter) // /doctors, /facilities
 app.use('/api/v1', api)
@@ -44,6 +46,7 @@ app.use(errorHandler)
 // --- Serveur HTTP + Socket.IO (messagerie temps réel, cf. plan §6) ---
 const server = http.createServer(app)
 const io = new SocketServer(server, { cors: { origin: env.corsOrigin } })
+app.set('io', io) // accessible aux routes pour diffuser les messages
 
 // Authentifie chaque connexion socket via le JWT.
 io.use((socket, next) => {
@@ -57,15 +60,12 @@ io.use((socket, next) => {
 })
 
 io.on('connection', (socket) => {
-  socket.on('conversation:join', (conversationId) => {
-    socket.join(`conv:${conversationId}`)
-  })
-
-  socket.on('message:send', async ({ conversationId, content }) => {
-    const message = await prisma.message.create({
-      data: { conversationId, senderId: socket.user.sub, content },
-    })
-    io.to(`conv:${conversationId}`).emit('message:new', message)
+  // On ne rejoint une room qu'après vérification de l'appartenance (cf. faille corrigée).
+  // L'envoi de messages passe par l'API REST (POST /conversations/:id/messages),
+  // qui persiste, contrôle les droits, puis diffuse ici via 'message:new'.
+  socket.on('conversation:join', async (conversationId) => {
+    const conv = await getMemberConversation(conversationId, socket.user.sub)
+    if (conv) socket.join(`conv:${conversationId}`)
   })
 })
 

@@ -71,6 +71,7 @@ export const api = {
   // Vrai si une session API réelle est active (jeton présent).
   // En mode démo (aucun jeton), les ressources servent les données locales.
   hasToken: () => Boolean(token),
+  getToken: () => token,
   get: (path) => request('GET', path),
   post: (path, body) => request('POST', path, body),
   put: (path, body) => request('PUT', path, body),

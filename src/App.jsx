@@ -11,6 +11,7 @@ const Doctors = lazy(() => import('./pages/Doctors.jsx'))
 const Appointments = lazy(() => import('./pages/Appointments.jsx'))
 const MedicalRecord = lazy(() => import('./pages/MedicalRecord.jsx'))
 const Messages = lazy(() => import('./pages/Messages.jsx'))
+const ConversationThread = lazy(() => import('./pages/ConversationThread.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/medical-record" element={<MedicalRecord />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/messages/:id" element={<ConversationThread />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

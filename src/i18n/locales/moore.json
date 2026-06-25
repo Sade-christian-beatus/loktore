@@ -68,8 +68,10 @@
   },
   "messages": {
     "title": "Koeesgo",
-    "empty": "Y koees ne logtoɛɛmba na n yita ka.",
-    "soon": "Na n wa (Phase 4)."
+    "empty": "Koeesg ka be ye.",
+    "startHint": "Sɩng koees ne logtoɛɛga",
+    "placeholder": "Gʋls koɛɛg…",
+    "send": "Tʋm"
   },
   "map": {
     "title": "Laafɩ zĩisi",

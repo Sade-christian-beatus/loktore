@@ -120,6 +120,25 @@ export async function updateMedicalRecord(payload) {
   return api.put('/me/medical-record', payload)
 }
 
+// --- Messagerie ------------------------------------------------------------
+
+export async function fetchConversations() {
+  if (!api.hasToken()) return []
+  return api.get('/conversations')
+}
+
+export function createConversation(doctorId) {
+  return api.post('/conversations', { doctorId })
+}
+
+export function fetchMessages(conversationId) {
+  return api.get(`/conversations/${conversationId}/messages`)
+}
+
+export function sendMessage(conversationId, content) {
+  return api.post(`/conversations/${conversationId}/messages`, { content })
+}
+
 // --- Profil ----------------------------------------------------------------
 
 export async function updateProfile(payload) {

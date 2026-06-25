@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { doctors as demoDoctors } from '../data/demo.js'
-import { fetchDoctors } from '../services/resources.js'
+import { fetchDoctors, createConversation } from '../services/resources.js'
 import { useFetch } from '../hooks/useFetch.js'
 import DoctorCard from '../components/DoctorCard.jsx'
 import BookingModal from '../components/BookingModal.jsx'
@@ -11,9 +12,20 @@ const specialities = [...new Set(demoDoctors.map((d) => d.speciality))]
 
 export default function Doctors() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [filter, setFilter] = useState('all')
   const [booking, setBooking] = useState(null)
   const [confirmed, setConfirmed] = useState(false)
+
+  // Ouvre (ou retrouve) une conversation avec le médecin, puis y navigue.
+  async function startConversation(doctor) {
+    try {
+      const conv = await createConversation(doctor.id)
+      navigate(`/messages/${conv.id}`)
+    } catch {
+      navigate('/messages')
+    }
+  }
 
   const { data, loading } = useFetch(
     () => fetchDoctors(filter === 'all' ? {} : { speciality: filter }),
@@ -47,7 +59,7 @@ export default function Doctors() {
       ) : (
         <div className="mt-3 space-y-3">
           {list.map((d) => (
-            <DoctorCard key={d.id} doctor={d} onBook={setBooking} />
+            <DoctorCard key={d.id} doctor={d} onBook={setBooking} onMessage={startConversation} />
           ))}
         </div>
       )}
