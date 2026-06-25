@@ -29,6 +29,9 @@ export const api = {
     if (value) localStorage.setItem(TOKEN_KEY, value)
     else localStorage.removeItem(TOKEN_KEY)
   },
+  // Vrai si une session API réelle est active (jeton présent).
+  // En mode démo (aucun jeton), les ressources servent les données locales.
+  hasToken: () => Boolean(token),
   get: (path) => request('GET', path),
   post: (path, body) => request('POST', path, body),
   put: (path, body) => request('PUT', path, body),

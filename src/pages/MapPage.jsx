@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { facilities, pharmacies } from '../data/demo.js'
+import { fetchFacilities } from '../services/resources.js'
+import { useFetch } from '../hooks/useFetch.js'
 
 // Correctif des icônes par défaut de Leaflet avec un bundler (Vite).
 const icon = L.icon({
@@ -13,11 +14,11 @@ const icon = L.icon({
   iconAnchor: [12, 41],
 })
 
-const points = [...facilities, ...pharmacies]
 const OUAGA = [12.3686, -1.5275]
 
 export default function MapPage() {
   const { t } = useTranslation()
+  const points = (useFetch(fetchFacilities).data || []).filter((p) => p.lat != null && p.lng != null)
   return (
     <div className="flex h-[calc(100vh-5rem)] flex-col">
       <h1 className="px-4 pb-2 pt-6 text-xl font-bold text-slate-800">

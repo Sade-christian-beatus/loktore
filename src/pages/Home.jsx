@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth.js'
-import { quickAccess, doctors, pharmacies, healthTopics } from '../data/demo.js'
+import { quickAccess, healthTopics } from '../data/demo.js'
+import { fetchDoctors, fetchOnDutyPharmacies } from '../services/resources.js'
+import { useFetch } from '../hooks/useFetch.js'
 import OnlineDoctorCard from '../components/OnlineDoctorCard.jsx'
 
 function SectionHeader({ title, to }) {
@@ -21,8 +23,8 @@ function SectionHeader({ title, to }) {
 export default function Home() {
   const { t } = useTranslation()
   const { user } = useAuth()
-  const onlineDoctors = doctors.filter((d) => d.isOnline)
-  const onDuty = pharmacies.filter((p) => p.onDuty)
+  const onlineDoctors = useFetch(() => fetchDoctors({ online: true })).data || []
+  const onDuty = useFetch(fetchOnDutyPharmacies).data || []
   const firstName = (user?.fullName || 'Patient').split(' ')[0]
 
   return (

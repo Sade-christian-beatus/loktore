@@ -1,16 +1,22 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { doctors } from '../data/demo.js'
+import { doctors as demoDoctors } from '../data/demo.js'
+import { fetchDoctors } from '../services/resources.js'
+import { useFetch } from '../hooks/useFetch.js'
 import DoctorCard from '../components/DoctorCard.jsx'
 
-// Spécialités présentes dans le jeu de démo (filtres).
-const specialities = [...new Set(doctors.map((d) => d.speciality))]
+// Spécialités proposées en filtres (catalogue statique).
+const specialities = [...new Set(demoDoctors.map((d) => d.speciality))]
 
 export default function Doctors() {
   const { t } = useTranslation()
   const [filter, setFilter] = useState('all')
 
-  const list = filter === 'all' ? doctors : doctors.filter((d) => d.speciality === filter)
+  const { data, loading } = useFetch(
+    () => fetchDoctors(filter === 'all' ? {} : { speciality: filter }),
+    [filter],
+  )
+  const list = data || []
 
   return (
     <div className="px-4 pt-6">
@@ -27,11 +33,15 @@ export default function Doctors() {
         ))}
       </div>
 
-      <div className="mt-3 space-y-3">
-        {list.map((d) => (
-          <DoctorCard key={d.id} doctor={d} />
-        ))}
-      </div>
+      {loading ? (
+        <p className="mt-6 text-center text-sm text-slate-400">{t('common.loading')}</p>
+      ) : (
+        <div className="mt-3 space-y-3">
+          {list.map((d) => (
+            <DoctorCard key={d.id} doctor={d} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
