@@ -139,6 +139,32 @@ export function sendMessage(conversationId, content) {
   return api.post(`/conversations/${conversationId}/messages`, { content })
 }
 
+// --- Commandes (patient ↔ pharmacie) ---------------------------------------
+
+export function fetchFacilityMedications(facilityId) {
+  return api.get(`/facilities/${facilityId}/medications`)
+}
+
+export function createOrder(payload) {
+  return api.post('/orders', payload)
+}
+
+export function fetchOrders() {
+  return api.get('/orders')
+}
+
+export function cancelOrder(id) {
+  return api.patch(`/orders/${id}`, { status: 'cancelled' })
+}
+
+export function fetchPharmacyOrders() {
+  return api.get('/pharmacy/orders')
+}
+
+export function updatePharmacyOrder(id, status) {
+  return api.patch(`/pharmacy/orders/${id}`, { status })
+}
+
 // --- Consentements (partage du dossier médical) ----------------------------
 
 export function fetchConsents() {

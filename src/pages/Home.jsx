@@ -93,14 +93,26 @@ export default function Home() {
 
       {/* Accès rapides */}
       <div className="mt-5 grid grid-cols-4 gap-2">
-        {quickAccess.map((q) => (
-          <button key={q.key} className="flex flex-col items-center gap-1">
-            <span className="grid h-14 w-14 place-items-center rounded-full border border-slate-200 bg-white text-2xl shadow-sm">
-              {q.icon}
-            </span>
-            <span className="text-xs text-slate-600">{t(`quickAccess.${q.key}`)}</span>
-          </button>
-        ))}
+        {quickAccess.map((q) => {
+          const to = q.key === 'pharmacy' ? '/pharmacies' : null
+          const inner = (
+            <>
+              <span className="grid h-14 w-14 place-items-center rounded-full border border-slate-200 bg-white text-2xl shadow-sm">
+                {q.icon}
+              </span>
+              <span className="text-xs text-slate-600">{t(`quickAccess.${q.key}`)}</span>
+            </>
+          )
+          return to ? (
+            <Link key={q.key} to={to} className="flex flex-col items-center gap-1">
+              {inner}
+            </Link>
+          ) : (
+            <button key={q.key} className="flex flex-col items-center gap-1">
+              {inner}
+            </button>
+          )
+        })}
       </div>
 
       {/* Médecins en ligne */}

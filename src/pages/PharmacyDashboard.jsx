@@ -6,8 +6,19 @@ import {
   createMedication,
   updateMedication,
   deleteMedication,
+  fetchPharmacyOrders,
+  updatePharmacyOrder,
 } from '../services/resources.js'
 import { useFetch } from '../hooks/useFetch.js'
+
+const nextActions = {
+  pending: [
+    { status: 'accepted', key: 'accept', primary: true },
+    { status: 'cancelled', key: 'refuse' },
+  ],
+  accepted: [{ status: 'ready', key: 'ready', primary: true }],
+  ready: [{ status: 'completed', key: 'complete', primary: true }],
+}
 
 export default function PharmacyDashboard() {
   const { t } = useTranslation()
@@ -15,9 +26,15 @@ export default function PharmacyDashboard() {
   const [tick, setTick] = useState(0)
   const { data, loading } = useFetch(fetchPharmacyMedications, [tick])
   const meds = data || []
+  const orders = useFetch(fetchPharmacyOrders, [tick]).data || []
   const [form, setForm] = useState({ name: '', price: '' })
   const [error, setError] = useState('')
   const refresh = () => setTick((n) => n + 1)
+
+  async function setOrderStatus(id, status) {
+    await updatePharmacyOrder(id, status)
+    refresh()
+  }
 
   async function add(e) {
     e.preventDefault()
@@ -116,6 +133,48 @@ export default function PharmacyDashboard() {
               >
                 🗑
               </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <h2 className="mb-2 mt-6 font-semibold text-slate-800">{t('orders.received')}</h2>
+      {orders.length === 0 ? (
+        <p className="text-sm text-slate-400">{t('orders.noneReceived')}</p>
+      ) : (
+        <div className="space-y-3">
+          {orders.map((o) => (
+            <div key={o.id} className="card">
+              <div className="flex items-center justify-between">
+                <p className="font-medium text-slate-800">{o.patient?.fullName}</p>
+                <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600">
+                  {t(`orders.status.${o.status}`)}
+                </span>
+              </div>
+              <ul className="mt-2 space-y-0.5 text-sm text-slate-600">
+                {o.items.map((it) => (
+                  <li key={it.id}>
+                    {it.quantity} × {it.medication?.name}
+                  </li>
+                ))}
+              </ul>
+              {nextActions[o.status] && (
+                <div className="mt-3 flex gap-2">
+                  {nextActions[o.status].map((a) => (
+                    <button
+                      key={a.status}
+                      onClick={() => setOrderStatus(o.id, a.status)}
+                      className={`flex-1 rounded-lg py-1.5 text-sm font-medium ${
+                        a.primary
+                          ? 'bg-brand-600 text-white'
+                          : 'border border-red-200 text-red-600'
+                      }`}
+                    >
+                      {t(`orders.${a.key}`)}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

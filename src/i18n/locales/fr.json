@@ -131,6 +131,28 @@
     "saved": "Dossier enregistré.",
     "demoNotice": "Connectez-vous à un compte réel pour accéder à votre dossier médical."
   },
+  "orders": {
+    "pharmacies": "Pharmacies",
+    "newOrder": "Nouvelle commande",
+    "noProducts": "Aucun produit disponible.",
+    "placeOrder": "Commander",
+    "myOrders": "Mes commandes",
+    "empty": "Aucune commande pour le moment.",
+    "cancel": "Annuler la commande",
+    "received": "Commandes reçues",
+    "noneReceived": "Aucune commande reçue.",
+    "accept": "Accepter",
+    "refuse": "Refuser",
+    "ready": "Prête",
+    "complete": "Terminée",
+    "status": {
+      "pending": "En attente",
+      "accepted": "Acceptée",
+      "ready": "Prête",
+      "completed": "Terminée",
+      "cancelled": "Annulée"
+    }
+  },
   "consent": {
     "title": "Partage du dossier",
     "subtitle": "Autorisez ou retirez l'accès des médecins à votre dossier médical.",

@@ -131,6 +131,28 @@
     "saved": "Dosie bĩngame.",
     "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
   },
+  "orders": {
+    "pharmacies": "Faармаси-rãmba",
+    "newOrder": "Komaand paalga",
+    "noProducts": "Teed ka be ye.",
+    "placeOrder": "Komaande",
+    "myOrders": "M komaandã",
+    "empty": "Komaand ka be ye.",
+    "cancel": "Bas komaandã",
+    "received": "Komaand sẽn ta",
+    "noneReceived": "Komaand ka ta ye.",
+    "accept": "Sak",
+    "refuse": "Zãgs",
+    "ready": "Seglame",
+    "complete": "Sa",
+    "status": {
+      "pending": "Gũubo",
+      "accepted": "Sakame",
+      "ready": "Seglame",
+      "completed": "Saame",
+      "cancelled": "Basame"
+    }
+  },
   "consent": {
     "title": "Dosie pʋɩɩbo",
     "subtitle": "Kõ wall n yiis logtoɛɛmb sor n ges y laafɩ dosie.",

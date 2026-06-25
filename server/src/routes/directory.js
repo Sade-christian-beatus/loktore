@@ -4,6 +4,19 @@ import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
 
+// GET /facilities/:id/medications — catalogue d'une pharmacie (pour commander)
+router.get('/facilities/:id/medications', requireAuth, async (req, res, next) => {
+  try {
+    const meds = await prisma.medication.findMany({
+      where: { facilityId: req.params.id },
+      orderBy: { name: 'asc' },
+    })
+    res.json(meds)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // GET /doctors — liste filtrable (spécialité, en ligne). Données non sensibles.
 router.get('/doctors', requireAuth, async (req, res, next) => {
   try {

@@ -106,7 +106,10 @@ export default function Profile() {
         <MenuLink to="/appointments" icon="📅" label={t('profile.myAppointments')} />
         <MenuLink to="/medical-record" icon="🩺" label={t('profile.medicalRecord')} />
         {user?.role === 'patient' && (
-          <MenuLink to="/consents" icon="🔐" label={t('consent.title')} />
+          <>
+            <MenuLink to="/orders" icon="🧾" label={t('orders.myOrders')} />
+            <MenuLink to="/consents" icon="🔐" label={t('consent.title')} />
+          </>
         )}
         {user?.role === 'admin' && (
           <MenuLink to="/admin" icon="🛡️" label={t('admin.title')} />

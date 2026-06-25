@@ -35,6 +35,14 @@ enum ConsentStatus {
   revoked
 }
 
+enum OrderStatus {
+  pending
+  accepted
+  ready
+  completed
+  cancelled
+}
+
 // Profil = compte utilisateur (remplace auth.users + profiles de Supabase)
 model Profile {
   id                String   @id @default(uuid())
@@ -60,6 +68,7 @@ model Profile {
   pushSubscriptions    PushSubscription[]
   patientConsents      RecordConsent[] @relation("PatientConsents")
   doctorConsents       RecordConsent[] @relation("DoctorConsents")
+  patientOrders        Order[]         @relation("PatientOrders")
 }
 
 model MedicalRecord {
@@ -98,6 +107,7 @@ model Facility {
   ownerId     String?
   doctors     Doctor[]
   medications Medication[]
+  orders      Order[]
 
   @@index([ownerId])
 }
@@ -137,6 +147,34 @@ model Medication {
   price      Int?
   inStock    Boolean  @default(true)
   updatedAt  DateTime @updatedAt
+  orderItems OrderItem[]
+}
+
+// Commande de médicaments d'un patient auprès d'une pharmacie
+model Order {
+  id         String      @id @default(uuid())
+  patient    Profile     @relation("PatientOrders", fields: [patientId], references: [id])
+  patientId  String
+  facility   Facility    @relation(fields: [facilityId], references: [id])
+  facilityId String
+  status     OrderStatus @default(pending)
+  note       String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  items      OrderItem[]
+
+  @@index([patientId])
+  @@index([facilityId])
+}
+
+model OrderItem {
+  id           String     @id @default(uuid())
+  order        Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId      String
+  medication   Medication @relation(fields: [medicationId], references: [id])
+  medicationId String
+  quantity     Int        @default(1)
+  priceAtOrder Int?
 }
 
 model HealthContent {

@@ -93,4 +93,47 @@ router.delete('/medications/:id', async (req, res, next) => {
   }
 })
 
+// --- Commandes reçues ------------------------------------------------------
+
+// GET /pharmacy/orders — commandes adressées à sa pharmacie
+router.get('/orders', async (req, res, next) => {
+  try {
+    const facility = await ownedFacility(req.user.id)
+    if (!facility) return res.json([])
+    const orders = await prisma.order.findMany({
+      where: { facilityId: facility.id },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        patient: { select: { fullName: true } },
+        items: { include: { medication: { select: { name: true } } } },
+      },
+    })
+    res.json(orders)
+  } catch (err) {
+    next(err)
+  }
+})
+
+const orderStatusSchema = z.object({
+  status: z.enum(['pending', 'accepted', 'ready', 'completed', 'cancelled']),
+})
+
+// PATCH /pharmacy/orders/:id — met à jour le statut d'une commande reçue
+router.patch('/orders/:id', validate(orderStatusSchema), async (req, res, next) => {
+  try {
+    const facility = await ownedFacility(req.user.id)
+    const order = await prisma.order.findUnique({ where: { id: req.params.id } })
+    if (!order || !facility || order.facilityId !== facility.id) {
+      return res.status(404).json({ message: 'Commande introuvable' })
+    }
+    const updated = await prisma.order.update({
+      where: { id: order.id },
+      data: { status: req.body.status },
+    })
+    res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
 export default router
