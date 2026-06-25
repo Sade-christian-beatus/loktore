@@ -133,6 +133,18 @@ model HealthContent {
   publishedAt DateTime @default(now())
 }
 
+// Journal des accès aux dossiers médicaux (cf. PLAN §7.4 : qui, quand, quoi)
+model MedicalAccessLog {
+  id        String   @id @default(uuid())
+  actorId   String
+  patientId String
+  action    String // 'read' | 'write'
+  createdAt DateTime @default(now())
+
+  @@index([patientId])
+  @@index([actorId])
+}
+
 // Jetons de rafraîchissement (révocables) pour la rotation des sessions
 model RefreshToken {
   id        String   @id @default(uuid())

@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
 import { hashPassword, verifyPassword } from '../src/utils/password.js'
+import { encrypt, decrypt } from '../src/utils/crypto.js'
 import { signAccessToken, verifyAccessToken, signRefreshToken } from '../src/utils/jwt.js'
 import { requireAuth, requireRole, assertOwnership } from '../src/middleware/auth.js'
 
@@ -35,6 +36,21 @@ test('hashPassword produit un hash différent du clair et vérifiable', async ()
   assert.notEqual(hash, 'password123')
   assert.equal(await verifyPassword('password123', hash), true)
   assert.equal(await verifyPassword('mauvais', hash), false)
+})
+
+// --- Chiffrement au repos --------------------------------------------------
+
+test('encrypt/decrypt : aller-retour, ciphertext différent du clair', () => {
+  const clear = 'O+ allergie pénicilline'
+  const enc = encrypt(clear)
+  assert.notEqual(enc, clear)
+  assert.match(enc, /^enc:v1:/)
+  assert.equal(decrypt(enc), clear)
+})
+
+test('decrypt tolère les données legacy non chiffrées', () => {
+  assert.equal(decrypt('valeur-en-clair'), 'valeur-en-clair')
+  assert.equal(decrypt(null), null)
 })
 
 // --- JWT -------------------------------------------------------------------
