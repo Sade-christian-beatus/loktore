@@ -52,6 +52,10 @@ export default defineConfig({
       devOptions: { enabled: false },
     }),
   ],
+  // Tests frontend (Vitest) — limités à src/ (le backend utilise node:test).
+  test: {
+    include: ['src/**/*.test.{js,jsx}'],
+  },
   server: {
     port: 3000,
     proxy: {

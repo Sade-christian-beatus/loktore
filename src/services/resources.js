@@ -5,40 +5,12 @@
 // Tout échec réseau retombe aussi sur le repli démo : l'app reste utilisable.
 
 import { api } from './api.js'
+import { normalizeDoctor, normalizeFacility } from './normalize.js'
 import {
   doctors as demoDoctors,
   pharmacies as demoPharmacies,
   facilities as demoFacilities,
 } from '../data/demo.js'
-
-// --- Normalisation API -> UI ---------------------------------------------
-
-function normalizeDoctor(d) {
-  return {
-    id: d.id,
-    title: d.title || 'Dr',
-    fullName: d.profile?.fullName || d.fullName || '',
-    speciality: d.speciality,
-    facility: d.facility?.name || d.facility || '',
-    isOnline: Boolean(d.isOnline),
-    fee: d.consultationFee ?? d.fee ?? 0,
-    rating: d.rating,
-  }
-}
-
-function normalizeFacility(f) {
-  return {
-    id: f.id,
-    name: f.name,
-    type: f.type,
-    address: f.address || '',
-    phone: f.phone || '',
-    onDuty: Boolean(f.onDuty),
-    lat: f.latitude ?? f.lat,
-    lng: f.longitude ?? f.lng,
-    distanceKm: f.distanceKm,
-  }
-}
 
 // --- Médecins --------------------------------------------------------------
 

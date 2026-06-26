@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
 import { hashPassword, verifyPassword } from '../src/utils/password.js'
-import { encrypt, decrypt } from '../src/utils/crypto.js'
+import { encrypt, decrypt, encryptArray, decryptArray } from '../src/utils/crypto.js'
 import { signAccessToken, verifyAccessToken, signRefreshToken } from '../src/utils/jwt.js'
 import { requireAuth, requireRole, assertOwnership } from '../src/middleware/auth.js'
 
@@ -51,6 +51,14 @@ test('encrypt/decrypt : aller-retour, ciphertext différent du clair', () => {
 test('decrypt tolère les données legacy non chiffrées', () => {
   assert.equal(decrypt('valeur-en-clair'), 'valeur-en-clair')
   assert.equal(decrypt(null), null)
+})
+
+test('encryptArray/decryptArray : aller-retour sur un tableau (allergies)', () => {
+  const allergies = ['pénicilline', 'arachide']
+  const enc = encryptArray(allergies)
+  assert.notDeepEqual(enc, allergies)
+  enc.forEach((v) => assert.match(v, /^enc:v1:/))
+  assert.deepEqual(decryptArray(enc), allergies)
 })
 
 // --- JWT -------------------------------------------------------------------
