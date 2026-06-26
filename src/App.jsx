@@ -14,6 +14,7 @@ const Consents = lazy(() => import('./pages/Consents.jsx'))
 const Pharmacies = lazy(() => import('./pages/Pharmacies.jsx'))
 const Order = lazy(() => import('./pages/Order.jsx'))
 const MyOrders = lazy(() => import('./pages/MyOrders.jsx'))
+const Payment = lazy(() => import('./pages/Payment.jsx'))
 const Appointments = lazy(() => import('./pages/Appointments.jsx'))
 const MedicalRecord = lazy(() => import('./pages/MedicalRecord.jsx'))
 const Messages = lazy(() => import('./pages/Messages.jsx'))
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="/pharmacies" element={<Pharmacies />} />
           <Route path="/order/:facilityId" element={<Order />} />
           <Route path="/orders" element={<MyOrders />} />
+          <Route path="/pay/:orderId" element={<Payment />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/medical-record" element={<MedicalRecord />} />
           <Route path="/messages" element={<Messages />} />

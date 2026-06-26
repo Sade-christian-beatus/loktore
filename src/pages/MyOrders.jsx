@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { fetchOrders, cancelOrder } from '../services/resources.js'
 import { useFetch } from '../hooks/useFetch.js'
@@ -60,6 +61,23 @@ export default function MyOrders() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-2 flex items-center justify-between">
+                <span
+                  className={`text-xs ${
+                    o.payment?.status === 'succeeded' ? 'text-brand-700' : 'text-slate-400'
+                  }`}
+                >
+                  {o.payment?.status === 'succeeded' ? t('payment.paid') : t('payment.unpaid')}
+                </span>
+                {o.payment?.status !== 'succeeded' && o.status !== 'cancelled' && (
+                  <Link
+                    to={`/pay/${o.id}`}
+                    className="rounded-lg bg-brand-600 px-3 py-1 text-xs font-medium text-white"
+                  >
+                    {t('payment.pay')}
+                  </Link>
+                )}
+              </div>
               {o.status === 'pending' && (
                 <button
                   onClick={() => cancel(o.id)}

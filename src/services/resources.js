@@ -157,6 +157,14 @@ export function cancelOrder(id) {
   return api.patch(`/orders/${id}`, { status: 'cancelled' })
 }
 
+export function payOrder(orderId, payload) {
+  return api.post(`/orders/${orderId}/pay`, payload)
+}
+
+export function confirmPayment(paymentId) {
+  return api.post(`/payments/${paymentId}/confirm`)
+}
+
 export function fetchPharmacyOrders() {
   return api.get('/pharmacy/orders')
 }

@@ -131,6 +131,17 @@
     "saved": "Dosie bĩngame.",
     "demoNotice": "Kẽng ne kõnt sɩd n paam y laafɩ dosie."
   },
+  "payment": {
+    "title": "Yaood Mobile Money",
+    "phone": "Telefõ nimero",
+    "pay": "Yao",
+    "confirmPrompt": "Sɩng yaood-kãngã y telefõ zugu, rẽ poore confirme ka.",
+    "confirm": "Mam confirme",
+    "reference": "Referãs",
+    "failed": "Yaood pa confirme ye. Maag-y yɛs.",
+    "paid": "Yaoome",
+    "unpaid": "Pa yaood ye"
+  },
   "orders": {
     "pharmacies": "Faармаси-rãmba",
     "newOrder": "Komaand paalga",

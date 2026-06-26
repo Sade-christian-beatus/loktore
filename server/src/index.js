@@ -17,6 +17,7 @@ import directoryRouter from './routes/directory.js'
 import adminRouter from './routes/admin.js'
 import pharmacyRouter from './routes/pharmacy.js'
 import ordersRouter from './routes/orders.js'
+import paymentsRouter from './routes/payments.js'
 import pushRouter from './routes/push.js'
 import consentsRouter from './routes/consents.js'
 import recordsRouter from './routes/records.js'
@@ -44,6 +45,7 @@ api.use('/conversations', conversationsRouter)
 api.use('/admin', adminRouter)
 api.use('/pharmacy', pharmacyRouter)
 api.use('/orders', ordersRouter)
+api.use('/payments', paymentsRouter)
 api.use('/push', pushRouter)
 api.use('/consents', consentsRouter)
 api.use('/patients', recordsRouter)

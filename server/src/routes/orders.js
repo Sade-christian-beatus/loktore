@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { prisma } from '../lib/prisma.js'
 import { requireAuth, requireRole } from '../middleware/auth.js'
 import { validate } from '../middleware/validate.js'
+import { initiatePayment, normalizeProvider } from '../lib/payments.js'
 
 const router = Router()
 router.use(requireAuth)
@@ -10,6 +11,7 @@ router.use(requireAuth)
 const orderInclude = {
   facility: { select: { id: true, name: true } },
   items: { include: { medication: { select: { name: true } } } },
+  payment: true,
 }
 
 // GET /orders — les commandes du patient
@@ -93,6 +95,43 @@ router.patch('/:id', requireRole('patient'), async (req, res, next) => {
       include: orderInclude,
     })
     res.json(updated)
+  } catch (err) {
+    next(err)
+  }
+})
+
+const paySchema = z.object({
+  phone: z.string().min(8).max(20),
+  provider: z.string().optional(),
+})
+
+// POST /orders/:id/pay — initie un paiement Mobile Money pour sa commande
+router.post('/:id/pay', requireRole('patient'), validate(paySchema), async (req, res, next) => {
+  try {
+    const order = await prisma.order.findUnique({
+      where: { id: req.params.id },
+      include: { items: true, payment: true },
+    })
+    if (!order || order.patientId !== req.user.id) {
+      return res.status(404).json({ message: 'Commande introuvable' })
+    }
+    if (order.status === 'cancelled') {
+      return res.status(409).json({ message: 'Commande annulée' })
+    }
+    if (order.payment?.status === 'succeeded') {
+      return res.status(409).json({ message: 'Commande déjà payée' })
+    }
+
+    const amount = order.items.reduce((s, it) => s + (it.priceAtOrder || 0) * it.quantity, 0)
+    const provider = normalizeProvider(req.body.provider)
+    const { reference, status } = initiatePayment({ provider, phone: req.body.phone, amount })
+
+    const payment = await prisma.payment.upsert({
+      where: { orderId: order.id },
+      update: { provider, phone: req.body.phone, amount, reference, status },
+      create: { orderId: order.id, provider, phone: req.body.phone, amount, reference, status },
+    })
+    res.status(201).json(payment)
   } catch (err) {
     next(err)
   }

@@ -43,6 +43,12 @@ enum OrderStatus {
   cancelled
 }
 
+enum PaymentStatus {
+  processing
+  succeeded
+  failed
+}
+
 // Profil = compte utilisateur (remplace auth.users + profiles de Supabase)
 model Profile {
   id                String   @id @default(uuid())
@@ -162,9 +168,26 @@ model Order {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   items      OrderItem[]
+  payment    Payment?
 
   @@index([patientId])
   @@index([facilityId])
+}
+
+// Paiement Mobile Money d'une commande (Orange / Moov). Le traitement réel
+// passe par un service serveur dédié (cf. PLAN §6) ; ici via un fournisseur
+// abstrait (mock) remplaçable par l'API réelle.
+model Payment {
+  id         String        @id @default(uuid())
+  order      Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId    String        @unique
+  provider   String // 'orange' | 'moov' | 'mock'
+  phone      String
+  amount     Int
+  reference  String
+  status     PaymentStatus @default(processing)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 }
 
 model OrderItem {
