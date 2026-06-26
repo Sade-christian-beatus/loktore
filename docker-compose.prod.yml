@@ -1,0 +1,48 @@
+# Pile de production Loktoré : PostgreSQL + API + PWA (nginx).
+# Hébergement cible : serveur au Burkina Faso (cf. PLAN_TECHNIQUE §8).
+# Démarrer : cp .env.prod.example .env.prod puis
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-loktore}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-loktore}
+      POSTGRES_DB: ${POSTGRES_DB:-loktore}
+    volumes:
+      - loktore_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-loktore}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./server
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-loktore}:${POSTGRES_PASSWORD:-loktore}@db:5432/${POSTGRES_DB:-loktore}?schema=public
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:contact@loktore.bf}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      NODE_ENV: production
+      PORT: 4000
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - '${WEB_PORT:-8080}:80'
+
+volumes:
+  loktore_pgdata:

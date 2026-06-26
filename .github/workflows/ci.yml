@@ -42,3 +42,14 @@ jobs:
       - run: npm ci
       - run: npx prisma generate
       - run: npm test
+
+  docker:
+    name: Build images Docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image API
+        run: docker build -t loktore-api ./server
+      - name: Build image web
+        run: docker build -t loktore-web .
+
