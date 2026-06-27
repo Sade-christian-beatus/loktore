@@ -1,4 +1,9 @@
-// Middleware de validation Zod : valide req.body et remplace par la version typée.
+// @ts-check
+/**
+ * Middleware de validation Zod : valide req.body et remplace par la version typée.
+ * @param {import('zod').ZodTypeAny} schema
+ * @returns {import('express').RequestHandler}
+ */
 export function validate(schema) {
   return (req, res, next) => {
     const result = schema.safeParse(req.body)

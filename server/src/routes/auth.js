@@ -14,7 +14,12 @@ const router = Router()
 
 const registerSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8, 'Mot de passe : 8 caractères minimum'),
+  password: z
+    .string()
+    .min(8, 'Mot de passe : 8 caractères minimum')
+    .refine((p) => /[A-Z]/.test(p), 'Mot de passe : au moins une majuscule')
+    .refine((p) => /[0-9]/.test(p), 'Mot de passe : au moins un chiffre')
+    .refine((p) => /[^A-Za-z0-9]/.test(p), 'Mot de passe : au moins un caractère spécial'),
   fullName: z.string().min(2),
   phone: z.string().min(8).optional(),
   preferredLanguage: z.enum(['fr', 'moore']).optional(),
