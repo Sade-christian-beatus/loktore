@@ -1,0 +1,228 @@
+{
+  "app": {
+    "name": "Loktoré",
+    "tagline": "I ka kènè i bolo la"
+  },
+  "nav": {
+    "home": "So",
+    "messages": "Kuma",
+    "map": "Karte",
+    "agenda": "Ajanda",
+    "profile": "Profili"
+  },
+  "doctor": {
+    "dashboard": "Dɔkɔtɔrɔ yɔrɔ",
+    "today": "Bi",
+    "patients": "Banabagatɔw",
+    "upcoming": "Kɔnɔnatow rendevu",
+    "agenda": "Ajanda filɛ",
+    "noUpcoming": "Rendevu tɛ yen.",
+    "myPatients": "N banabagatɔw",
+    "noPatients": "Banabagatɔ tɛ yen.",
+    "appointmentsCount": "rendevu",
+    "recordConsentNote": "Dɔsiye filɛli bɛ banabagatɔ sɔnna fɛ."
+  },
+  "login": {
+    "title": "Donsɔrɔ",
+    "subtitle": "Donso ka kènè baara sɔrɔ",
+    "phone": "Telefɔni nimɔrɔ",
+    "password": "Gundo kuma",
+    "submit": "Donso",
+    "forgotPassword": "I gundo kuma banna?",
+    "smsCode": "SMS cogo fɛ code sɔrɔ",
+    "noAccount": "Konti tɛ i fɛ?",
+    "register": "Konti dilan",
+    "demoHint": "Demo mode: sɛbɛn min bɛ n'a kɛra."
+  },
+  "register": {
+    "title": "Konti dilan",
+    "fullName": "Tɔgɔ bɛɛ",
+    "passwordHint": "Gundo kuma: sɛbɛnni 8 dɔrɔn.",
+    "submit": "Konti dilan",
+    "haveAccount": "Konti bɛ i fɛ?"
+  },
+  "home": {
+    "greeting": "I ni sɔgɔma, {{name}}",
+    "question": "I kènè bɛ di bi?",
+    "searchPlaceholder": "Ɲini…",
+    "priority": "I kènè y'a to an ɲɛ fɛ",
+    "talkToDoctor": "Dɔkɔtɔrɔ kuma",
+    "onlineDoctors": "Dɔkɔtɔrɔw online",
+    "healthTips": "Kènèya ladilikan",
+    "onDutyPharmacies": "Farmasiw sɔn",
+    "bookNow": "Rendevu ta",
+    "seeMore": "A lajɛ"
+  },
+  "quickAccess": {
+    "hospital": "Dukɔrɔsɔbɛ",
+    "pharmacy": "Farmasi",
+    "covid": "Covid 19",
+    "ambulance": "Ambulanse"
+  },
+  "categories": {
+    "general": "Dɔkɔtɔrɔ",
+    "pediatrics": "Dɔkɔtɔrɔ denw",
+    "gynecology": "Dɔkɔtɔrɔ musow",
+    "cardiology": "Sɔn dɔkɔtɔrɔ",
+    "dentistry": "Ɲinini dɔkɔtɔrɔ",
+    "dermatology": "Ɲɛ dɔkɔtɔrɔ",
+    "surgery": "Dɔkɔtɔrɔ kɛlɛ"
+  },
+  "topics": {
+    "nutrition": "Dumuni",
+    "hygiene": "Saniya",
+    "sexualHealth": "Kènèya sɛxɛ",
+    "moreCategories": "Sɔrɔ wɛrɛw"
+  },
+  "doctors": {
+    "title": "Dɔkɔtɔrɔw",
+    "online": "Online",
+    "fee": "Kɛɲɛ sara",
+    "book": "Rendevu ta",
+    "all": "Bɛɛ"
+  },
+  "messages": {
+    "title": "Kuma",
+    "empty": "Kumakan tɛ yen.",
+    "startHint": "Dɔkɔtɔrɔ n'a kuma daminɛ",
+    "placeholder": "Sɛbɛn kuma…",
+    "send": "Ci"
+  },
+  "map": {
+    "title": "Kènèya yɔrɔw",
+    "onDuty": "Sɔn"
+  },
+  "profile": {
+    "title": "Profili",
+    "language": "Kan",
+    "notifications": "Lasɔminin",
+    "enableNotifications": "Lasɔminin daminɛ",
+    "notifEnabled": "Lasɔminin daminɛna nin telefɔni kan.",
+    "edit": "Yɛlɛma",
+    "myAppointments": "N rendevuw",
+    "medicalRecord": "N kènèya dɔsiye",
+    "logout": "Bɔ"
+  },
+  "booking": {
+    "title": "Rendevu ta",
+    "datetime": "Lɔgɔ ni waati",
+    "reason": "Sababu (ni i sɔnna)",
+    "confirm": "Sɔn",
+    "success": "Rendevu ɲinina. I bɛ a ye « N rendevuw » la."
+  },
+  "appointments": {
+    "title": "N rendevuw",
+    "empty": "Rendevu tɛ yen.",
+    "cancel": "Dabɔ",
+    "confirm": "Sɔn",
+    "markDone": "Laban",
+    "status": {
+      "pending": "Makɔnɔ",
+      "confirmed": "Sɔnna",
+      "cancelled": "Dabɔra",
+      "done": "Labanna"
+    }
+  },
+  "record": {
+    "title": "N kènèya dɔsiye",
+    "bloodType": "Jɔlɔ sɔrɔ",
+    "allergies": "Alɛrzi",
+    "chronicConditions": "Bana dɔgɔyalen",
+    "commaHint": "Virgule fɛ k'a faranfasiya",
+    "save": "Mara",
+    "saved": "Dɔsiye marala.",
+    "demoNotice": "Donso ka i kènèya dɔsiye filɛ."
+  },
+  "payment": {
+    "title": "Mobile Money sara",
+    "phone": "Telefɔni nimɔrɔ",
+    "pay": "Sara",
+    "confirmPrompt": "Sara sɔn i telefɔni kan, o kɔ a jira fɔlɔ.",
+    "confirm": "N sɔnna",
+    "reference": "Refaranse",
+    "failed": "Sara sɔnna tɛ. Ɲinin tugu.",
+    "paid": "Sarala",
+    "unpaid": "Tɛ sarala"
+  },
+  "orders": {
+    "pharmacies": "Farmasiw",
+    "newOrder": "Kɔmandɛ kura",
+    "noProducts": "Fɛn tɛ yen.",
+    "placeOrder": "Kɔmandɛ",
+    "myOrders": "N kɔmandɛw",
+    "empty": "Kɔmandɛ tɛ yen.",
+    "cancel": "Kɔmandɛ dabɔ",
+    "received": "Kɔmandɛw minɛna",
+    "noneReceived": "Kɔmandɛ tɛ minɛna.",
+    "accept": "Sɔn",
+    "refuse": "Dabɔ",
+    "ready": "Labɛnna",
+    "complete": "Laban",
+    "status": {
+      "pending": "Makɔnɔ",
+      "accepted": "Sɔnna",
+      "ready": "Labɛnna",
+      "completed": "Labanna",
+      "cancelled": "Dabɔra"
+    }
+  },
+  "consent": {
+    "title": "Dɔsiye kɛɲɛ",
+    "subtitle": "Dɔkɔtɔrɔw sɔn ka i kènèya dɔsiye filɛ.",
+    "empty": "Ɲinini tɛ yen.",
+    "grant": "Sɔn",
+    "revoke": "Dabɔ",
+    "request": "Dɔsiye ɲini",
+    "waiting": "Banabagatɔ sɔn makɔnɔ",
+    "viewRecord": "Dɔsiye filɛ",
+    "accessLogged": "Nin sɔrɔli sɛbɛnna ka banabagatɔ sɔn ɲini.",
+    "status": {
+      "pending": "Makɔnɔ",
+      "granted": "Sɔnna",
+      "revoked": "Dabɔra"
+    }
+  },
+  "pharmacy": {
+    "dashboard": "Farmasi yɔrɔ",
+    "products": "Fɛnw",
+    "inStock": "Yen",
+    "addProduct": "Fɛn fara",
+    "name": "Fɛn tɔgɔ",
+    "price": "Nafa",
+    "add": "Fara",
+    "catalog": "Fɛnw bɛɛ",
+    "available": "Yen",
+    "outOfStock": "Bananen",
+    "remove": "Bɔ"
+  },
+  "admin": {
+    "title": "Gerekalan",
+    "patients": "Banabagatɔw",
+    "doctors": "Dɔkɔtɔrɔw",
+    "facilities": "Yɔrɔw",
+    "appointments": "Rendevuw",
+    "users": "Tɔgɔ donw"
+  },
+  "common": {
+    "currency": "FCFA",
+    "loading": "Makɔnɔ…",
+    "km": "km"
+  },
+  "analyze": {
+    "prescription": "Odɔnanse analizi",
+    "exam": "Egzamin analizi",
+    "uploadImage": "Fɔtɔ ta",
+    "analyzing": "Analizi bɛ kɛ…",
+    "result": "Jaabi",
+    "notAvailable": "Nin baara tɛ yen sisan.",
+    "uploadHint": "Odɔnanse fɔtɔ ta ka analizi sɔrɔ"
+  },
+  "search": {
+    "products": "Fɛnw ɲini",
+    "placeholder": "Fɛn tɔgɔ ɲini…",
+    "results": "Jaabili",
+    "noResults": "Fɛn ma sɔrɔ.",
+    "inStock": "Yen",
+    "outOfStock": "Bananen"
+  }
+}

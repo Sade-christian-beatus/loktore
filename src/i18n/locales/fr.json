@@ -23,12 +23,15 @@
     "recordConsentNotice": "L'accès au dossier médical d'un patient nécessitera son consentement explicite (fonctionnalité à venir)."
   },
   "login": {
-    "title": "Connexion",
+    "title": "Se connecter",
     "subtitle": "Connectez-vous pour accéder à vos services de santé",
+    "phone": "Numéro de téléphone",
     "email": "Adresse e-mail ou téléphone",
     "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "smsCode": "Recevoir un code par SMS",
     "submit": "Se connecter",
-    "noAccount": "Pas encore de compte ?",
+    "noAccount": "Pas de compte ?",
     "register": "Créer un compte",
     "demoHint": "Mode démo : entrez n'importe quels identifiants pour explorer."
   },
@@ -205,5 +208,22 @@
     "currency": "FCFA",
     "loading": "Chargement…",
     "km": "km"
+  },
+  "analyze": {
+    "prescription": "Analyser une ordonnance",
+    "exam": "Interpréter un examen",
+    "uploadImage": "Choisir une image",
+    "analyzing": "Analyse en cours…",
+    "result": "Résultat",
+    "notAvailable": "Cette fonctionnalité n'est pas encore disponible sur ce serveur.",
+    "uploadHint": "Prenez en photo votre ordonnance ou importez une image (JPEG, PNG)"
+  },
+  "search": {
+    "products": "Rechercher un médicament",
+    "placeholder": "Nom du médicament…",
+    "results": "Résultats",
+    "noResults": "Aucun médicament trouvé.",
+    "inStock": "En stock",
+    "outOfStock": "Rupture de stock"
   }
 }

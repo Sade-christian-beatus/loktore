@@ -25,8 +25,9 @@ const registerSchema = z.object({
   preferredLanguage: z.enum(['fr', 'moore']).optional(),
 })
 
+// Accepte email ou numéro de téléphone burkinabé (avec ou sans +226)
 const loginSchema = z.object({
-  email: z.string().email(),
+  identifier: z.string().min(1),
   password: z.string().min(1),
 })
 
@@ -77,11 +78,23 @@ router.post('/register', validate(registerSchema), async (req, res, next) => {
   }
 })
 
-// POST /auth/login — connexion, renvoie un JWT
+// POST /auth/login — connexion par email ou numéro de téléphone
 router.post('/login', validate(loginSchema), async (req, res, next) => {
   try {
-    const profile = await prisma.profile.findUnique({ where: { email: req.body.email } })
-    if (!profile || !(await verifyPassword(req.body.password, profile.passwordHash))) {
+    const { identifier, password } = req.body
+    // Normalise le numéro de téléphone burkinabé (ex: 70123456 → +22670123456)
+    const isPhone = /^\+?[0-9]{8,15}$/.test(identifier.replace(/\s/g, ''))
+    let profile = null
+    if (isPhone) {
+      const normalized = identifier.replace(/\s/g, '').replace(/^\+?226/, '')
+      profile = await prisma.profile.findFirst({
+        where: { phone: { in: [normalized, `+226${normalized}`, `226${normalized}`] } },
+      })
+    }
+    if (!profile) {
+      profile = await prisma.profile.findUnique({ where: { email: identifier } })
+    }
+    if (!profile || !(await verifyPassword(password, profile.passwordHash))) {
       return res.status(401).json({ message: 'Identifiants incorrects' })
     }
     const { token, refresh } = await issueTokens(profile)

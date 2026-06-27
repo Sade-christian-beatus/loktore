@@ -43,15 +43,15 @@ export function useAuth() {
 
   return {
     user: snapshot.user,
-    async login({ email, password }) {
+    async login({ identifier, password }) {
       // Tente l'API ; en cas d'échec (backend absent), bascule en démo.
       try {
-        return persistSession(await api.post('/auth/login', { email, password }))
+        return persistSession(await api.post('/auth/login', { identifier, password }))
       } catch {
         const demoUser = {
           id: 'demo',
-          email,
-          fullName: email.split('@')[0] || 'Patient',
+          email: identifier,
+          fullName: identifier.replace(/^\+?226/, '').trim() || 'Patient',
           role: 'patient',
           demo: true,
         }

@@ -4,6 +4,26 @@ import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
 
+// GET /medications/search?q=xxx — cherche un médicament dans toutes les pharmacies
+router.get('/medications/search', requireAuth, async (req, res, next) => {
+  try {
+    const q = (req.query.q || '').trim()
+    if (!q) return res.json([])
+    const meds = await prisma.medication.findMany({
+      where: {
+        name: { contains: q, mode: 'insensitive' },
+      },
+      include: {
+        facility: { select: { id: true, name: true, address: true, phone: true, onDuty: true } },
+      },
+      orderBy: [{ inStock: 'desc' }, { name: 'asc' }],
+    })
+    res.json(meds)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // GET /facilities/:id/medications — catalogue d'une pharmacie (pour commander)
 router.get('/facilities/:id/medications', requireAuth, async (req, res, next) => {
   try {

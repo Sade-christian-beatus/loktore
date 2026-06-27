@@ -12,6 +12,21 @@ export default function Pharmacies() {
     <div className="px-4 pt-6">
       <h1 className="text-xl font-bold text-slate-800">{t('orders.pharmacies')}</h1>
 
+      {/* Raccourci recherche médicament */}
+      <Link
+        to="/search-products"
+        className="mt-3 flex items-center gap-3 rounded-2xl bg-brand-50 border border-brand-200 px-4 py-3"
+      >
+        <span className="text-2xl">🔍</span>
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-brand-700 text-sm">Rechercher un médicament</p>
+          <p className="text-xs text-slate-500 truncate">Comparez disponibilité et prix dans toutes les pharmacies</p>
+        </div>
+        <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-brand-400" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </Link>
+
       {loading ? (
         <div className="mt-10 flex justify-center">
           <span className="spinner" />
