@@ -1,3 +1,4 @@
+// @ts-check
 import crypto from 'node:crypto'
 import { env } from '../lib/env.js'
 
@@ -22,6 +23,10 @@ function loadKey() {
 
 const KEY = loadKey()
 
+/**
+ * @param {string | null | undefined} plaintext
+ * @returns {string | null | undefined}
+ */
 export function encrypt(plaintext) {
   if (plaintext == null) return plaintext
   const iv = crypto.randomBytes(12)
@@ -31,6 +36,10 @@ export function encrypt(plaintext) {
   return PREFIX + [iv, tag, enc].map((b) => b.toString('base64')).join('.')
 }
 
+/**
+ * @param {string | null | undefined} value
+ * @returns {string | null | undefined}
+ */
 export function decrypt(value) {
   if (value == null) return value
   // Tolérance aux données legacy non chiffrées (renvoyées telles quelles).
