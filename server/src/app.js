@@ -19,6 +19,7 @@ import pushRouter from './routes/push.js'
 import consentsRouter from './routes/consents.js'
 import recordsRouter from './routes/records.js'
 import conversationsRouter from './routes/conversations.js'
+import reportsRouter from './routes/reports.js'
 
 export function createApp() {
   const app = express()
@@ -45,6 +46,7 @@ export function createApp() {
   api.use('/push', pushRouter)
   api.use('/consents', consentsRouter)
   api.use('/patients', recordsRouter)
+  api.use('/reports', reportsRouter)
   api.use('/', directoryRouter)
   app.use('/api/v1', api)
 

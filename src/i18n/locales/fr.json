@@ -8,7 +8,8 @@
     "messages": "Messages",
     "map": "Carte",
     "agenda": "Agenda",
-    "profile": "Profil"
+    "profile": "Profil",
+    "reports": "Rapports"
   },
   "doctor": {
     "dashboard": "Espace médecin",

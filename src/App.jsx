@@ -22,6 +22,7 @@ const ConversationThread = lazy(() => import('./pages/ConversationThread.jsx'))
 const MapPage = lazy(() => import('./pages/MapPage.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 const Admin = lazy(() => import('./pages/Admin.jsx'))
+const AfricanReports = lazy(() => import('./pages/AfricanReports.jsx'))
 
 function Protected({ children }) {
   const { user } = useAuth()
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/map" element={<MapPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/reports" element={<AfricanReports />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

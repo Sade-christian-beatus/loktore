@@ -267,6 +267,45 @@ model PushSubscription {
   @@index([profileId])
 }
 
+// Rapport/étude/donnée africaine collectée, vérifiée et publiée automatiquement
+model AfricanReport {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  source      String    // 'worldbank' | 'who' | 'reliefweb' | 'afdb' | 'manual'
+  sourceUrl   String
+  country     String    // code ISO alpha-2 ou 'ALL'
+  countryName String
+  category    String    // 'health' | 'economy' | 'education' | 'humanitarian' | 'environment' | 'other'
+  reportedAt  DateTime
+  fetchedAt   DateTime  @default(now())
+  verified    Boolean   @default(false)
+  verifiedAt  DateTime?
+  published   Boolean   @default(false)
+  releasedAt  DateTime?
+  rawData     Json?
+  language    String    @default("fr")
+  tags        String[]
+
+  @@index([country])
+  @@index([category])
+  @@index([source])
+  @@index([verified, published])
+}
+
+// Historique des exécutions du pipeline de collecte
+model AfricanReportJob {
+  id          String   @id @default(uuid())
+  source      String
+  startedAt   DateTime @default(now())
+  finishedAt  DateTime?
+  status      String   // 'running' | 'done' | 'error'
+  fetched     Int      @default(0)
+  verified    Int      @default(0)
+  published   Int      @default(0)
+  errorMsg    String?
+}
+
 // Jetons de rafraîchissement (révocables) pour la rotation des sessions
 model RefreshToken {
   id        String   @id @default(uuid())

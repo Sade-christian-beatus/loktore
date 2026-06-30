@@ -7,6 +7,7 @@ import { logger } from './lib/logger.js'
 import { verifyAccessToken } from './utils/jwt.js'
 import { createApp } from './app.js'
 import { getMemberConversation } from './routes/conversations.js'
+import { startScheduler } from './services/africanReports/scheduler.js'
 
 const app = createApp()
 const server = http.createServer(app)
@@ -32,6 +33,8 @@ io.on('connection', (socket) => {
 
 server.listen(env.port, () => {
   logger.info({ port: env.port, env: env.nodeEnv }, `API Loktoré démarrée sur le port ${env.port}`)
+  // Lance la collecte automatique des rapports africains (toutes les 6h)
+  startScheduler()
 })
 
 process.on('SIGTERM', async () => {
